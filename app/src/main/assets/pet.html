@@ -4,38 +4,65 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  html, body { margin:0; padding:0; background:transparent; }
-  #pet { width:100vw; height:100vh; display:block; image-rendering: pixelated; }
-  /* 只有 .face 会跟着动，影子留在外面不动 */
+  html, body { margin:0; padding:0; background:transparent; overflow:hidden; }
+  #pet { width:100vw; height:100vh; display:block; }
+  /* 呼吸和眨眼动画 */
+  .breathe-anim {
+    transform-origin: 7.5px 13px;
+    animation: breathe 3.2s infinite ease-in-out;
+  }
+  .eyes-blink {
+    transform-origin: 7.5px 9px;
+    animation: eye-blink 4s infinite ease-in-out;
+  }
+  #eyes-js, #body-js, #shadow-js {
+    transition: transform 0.2s ease-out;
+  }
+  #shadow-js {
+    transform-origin: 7.5px 15px;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1, 1) translate(0, 0); }
+    50% { transform: scale(1.02, 0.98) translate(0, 0.5px); }
+  }
+  @keyframes eye-blink {
+    0%, 10%, 100% { transform: scaleY(1); }
+    5% { transform: scaleY(0.1); }
+  }
+  /* 双击放大、长按旋转 */
   .face { transition: transform 0.15s ease; transform-origin: center; }
 </style>
 </head>
 <body>
-<svg id="pet" viewBox="0 0 180 240" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-  <!-- 影子：细长半透明灰色长方形，放在 g 外面，不会跟着缩放/旋转 -->
-  <rect x="45" y="170" width="90" height="4" fill="#000000" opacity="0.25"/>
-
-  <g class="face">
-    <!-- 螃蟹身体（正长方形，没有头顶的空缺） -->
-    <rect x="60" y="115" width="60" height="45" fill="#e8735a"/>
-    
-    <!-- 左钳子（简单的方块） -->
-    <rect x="35" y="130" width="20" height="15" fill="#e8735a"/>
-    <!-- 右钳子（简单的方块） -->
-    <rect x="125" y="130" width="20" height="15" fill="#e8735a"/>
-
-    <!-- 螃蟹眼睛（黑色方块，贴在身体内部靠上的位置） -->
-    <rect x="75" y="125" width="8" height="12" fill="#1a1a1a"/>
-    <rect x="97" y="125" width="8" height="12" fill="#1a1a1a"/>
-    
-    <!-- 螃蟹腿：左右各两条，细一点，中间留空 -->
-    <rect x="68" y="160" width="6" height="12" fill="#e8735a"/>
-    <rect x="80" y="160" width="6" height="12" fill="#e8735a"/>
-    <rect x="94" y="160" width="6" height="12" fill="#e8735a"/>
-    <rect x="106" y="160" width="6" height="12" fill="#e8735a"/>
-    
-    <!-- 嘴巴（方块） -->
-    <rect id="mouth" x="85" y="145" width="10" height="4" fill="#1a1a1a"/>
+<svg id="pet" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
+  <!-- 影子：独立分组，不会被身体缩放/旋转带跑 -->
+  <g id="shadow-js">
+    <rect x="3" y="15" width="9" height="1" fill="#000000" opacity="0.5"/>
+  </g>
+  <!-- 腿 -->
+  <g id="legs" fill="#DE886D">
+    <rect x="3" y="11" width="1" height="4"/>
+    <rect x="5" y="11" width="1" height="4"/>
+    <rect x="9" y="11" width="1" height="4"/>
+    <rect x="11" y="11" width="1" height="4"/>
+  </g>
+  <!-- 身体（包含呼吸、眨眼、眼睛跟随） -->
+  <g id="body-js">
+    <g class="breathe-anim">
+      <!-- 躯干 -->
+      <rect id="torso" x="2" y="6" width="11" height="7" fill="#DE886D"/>
+      <!-- 左钳子 -->
+      <rect x="0" y="9" width="2" height="2" fill="#DE886D"/>
+      <!-- 右钳子 -->
+      <rect x="13" y="9" width="2" height="2" fill="#DE886D"/>
+      <!-- 眼睛：跟随手指滑动 + 眨眼 -->
+      <g id="eyes-js" fill="#000000">
+        <g class="eyes-blink">
+          <rect x="4" y="8" width="1" height="2"/>
+          <rect x="10" y="8" width="1" height="2"/>
+        </g>
+      </g>
+    </g>
   </g>
 </svg>
 
@@ -48,23 +75,41 @@
   };
 
   function react(type) {
-    var mouth = document.getElementById('mouth');
-    var face = document.querySelector('.face');
+    var eyes = document.getElementById('eyes-js');
+    var body = document.getElementById('body-js');
 
     if (type === 'tap') {
-      mouth.setAttribute('width', '14');
-      mouth.setAttribute('x', '83');
       showBubble('嘎嘎！');
     } else if (type === 'doubletap') {
-      face.style.transform = 'scale(1.15)';
-      setTimeout(function(){ face.style.transform = 'scale(1)'; }, 150);
+      body.style.transform = 'scale(1.15)';
+      setTimeout(function(){ body.style.transform = 'scale(1)'; }, 150);
       showBubble('别戳啦！');
     } else if (type === 'longpress') {
-      face.style.transform = 'rotate(15deg)';
-      setTimeout(function(){ face.style.transform = 'rotate(0)'; }, 300);
+      body.style.transform = 'rotate(15deg)';
+      setTimeout(function(){ body.style.transform = 'rotate(0)'; }, 300);
       showBubble('？');
     }
   }
+
+  // 手指滑动时，眼睛跟着看
+  document.addEventListener('touchmove', function(e) {
+    var touch = e.touches[0];
+    var x = touch.clientX;
+    var y = touch.clientY;
+    var centerX = window.innerWidth / 2;
+    var centerY = window.innerHeight / 2;
+    // 算出偏移量，限制最大 3px，防止眼睛跑飞
+    var maxOffset = 3;
+    var offsetX = Math.max(-maxOffset, Math.min(maxOffset, (x - centerX) / centerX * maxOffset));
+    var offsetY = Math.max(-maxOffset, Math.min(maxOffset, (y - centerY) / centerY * maxOffset));
+    document.getElementById('eyes-js').style.transform = 
+      'translate(' + offsetX + 'px, ' + offsetY + 'px)';
+  });
+
+  document.addEventListener('touchend', function() {
+    // 手指松开，眼睛回到原位
+    document.getElementById('eyes-js').style.transform = 'translate(0px, 0px)';
+  });
 
   function showBubble(text) {
     var old = document.getElementById('bubble');
