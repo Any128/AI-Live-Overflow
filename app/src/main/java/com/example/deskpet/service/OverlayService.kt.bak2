@@ -80,10 +80,6 @@ class OverlayService : Service() {
     private var touchStartTime = 0L
     private var hasMoved = false
 
-    // 连击计数相关
-    private var tapCount = 0
-    private var lastComboTime = 0L
-
     private fun createTouchListener(): View.OnTouchListener {
         return View.OnTouchListener { _, event ->
             when (event.action) {
@@ -109,43 +105,14 @@ class OverlayService : Service() {
                 }
                 MotionEvent.ACTION_UP -> {
                     val duration = System.currentTimeMillis() - touchStartTime
-                    val dx = event.rawX - initialTouchX
-                    val dy = event.rawY - initialTouchY
-                    val distance = Math.sqrt((dx * dx + dy * dy).toDouble())
-                    val speed = if (duration > 0) distance / duration * 1000 else 0.0
-
-                    if (hasMoved && speed > 1500) {
-                        // === 快速拖拽（Fling）：甩出去再弹回来 ===
-                        params?.x = (params?.x ?: 0) + (dx * 1.5).toInt()
-                        params?.y = (params?.y ?: 0) + (dy * 1.5).toInt()
-                        windowManager?.updateViewLayout(overlayView, params)
-                        // 300ms 后弹回原位
-                        overlayView?.postDelayed({
-                            params?.x = initialX
-                            params?.y = initialY
-                            windowManager?.updateViewLayout(overlayView, params)
-                        }, 300)
-                    } else if (!hasMoved) {
-                        // === 点击 / 双击 / 长按 / 连击 ===
+                    if (!hasMoved) {
                         val now = System.currentTimeMillis()
                         if (duration > 500) {
                             onLongPress()
                         } else if (now - lastTapTime < 300) {
                             onDoubleTap()
                         } else {
-                            // 连击计数：2 秒内连续点击
-                            if (now - lastComboTime < 2000) {
-                                tapCount++
-                            } else {
-                                tapCount = 1
-                            }
-                            lastComboTime = now
-                            when {
-                                tapCount >= 8 -> { onCombo(8); tapCount = 0 }
-                                tapCount >= 5 -> { onCombo(5); tapCount = 0 }
-                                tapCount >= 3 -> { onCombo(3); tapCount = 0 }
-                                else -> onTap()
-                            }
+                            onTap()
                             lastTapTime = now
                         }
                     }
@@ -171,12 +138,6 @@ class OverlayService : Service() {
     private fun onLongPress() {
         overlayView?.evaluateJavascript(
             "window.petEngine && window.petEngine.onLongPress()", null
-        )
-    }
-
-    private fun onCombo(count: Int) {
-        overlayView?.evaluateJavascript(
-            "window.petEngine && window.petEngine.onCombo($count)", null
         )
     }
 
