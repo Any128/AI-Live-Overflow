@@ -14,7 +14,7 @@ import androidx.core.app.NotificationCompat
 
 /**
  * Minimal overlay service.
- * Stripped-down skeleton - add your own logic.
+ * Stripped-down skeleton — add your own logic.
  */
 class OverlayService : Service() {
 
@@ -104,16 +104,15 @@ class OverlayService : Service() {
                     true
                 }
                 MotionEvent.ACTION_UP -> {
-                    val duration = System.currentTimeMillis() - touchStartTime
+                    val elapsed = System.currentTimeMillis() - touchStartTime
                     if (!hasMoved) {
-                        val now = System.currentTimeMillis()
-                        if (duration > 500) {
-                            onLongPress()
-                        } else if (now - lastTapTime < 300) {
-                            onDoubleTap()
-                        } else {
-                            onTap()
-                            lastTapTime = now
+                        when {
+                            elapsed > 600 -> onLongPress()
+                            System.currentTimeMillis() - lastTapTime < 300 -> onDoubleTap()
+                            else -> {
+                                lastTapTime = System.currentTimeMillis()
+                                onTap()
+                            }
                         }
                     }
                     true
@@ -150,7 +149,7 @@ class OverlayService : Service() {
             PendingIntent.FLAG_IMMUTABLE
         )
         return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("桌宠")
+            .setContentTitle("\uD83D\uDC3E")
             .setContentText(text)
             .setSmallIcon(android.R.drawable.ic_menu_compass)
             .setContentIntent(pendingIntent)
