@@ -6,6 +6,7 @@
 <style>
   html, body { margin:0; padding:0; background:transparent; overflow:hidden; }
   #pet { width:100vw; height:100vh; display:block; }
+  /* 呼吸和眨眼动画 */
   .breathe-anim {
     transform-origin: 7.5px 13px;
     animation: breathe 3.2s infinite ease-in-out;
@@ -28,24 +29,33 @@
     0%, 10%, 100% { transform: scaleY(1); }
     5% { transform: scaleY(0.1); }
   }
+  /* 双击放大、长按旋转 */
+  .face { transition: transform 0.15s ease; transform-origin: center; }
 </style>
 </head>
 <body>
 <svg id="pet" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
+  <!-- 影子：独立分组，不会被身体缩放/旋转带跑 -->
   <g id="shadow-js">
     <rect x="3" y="15" width="9" height="1" fill="#000000" opacity="0.5"/>
   </g>
+  <!-- 腿 -->
   <g id="legs" fill="#DE886D">
     <rect x="3" y="11" width="1" height="4"/>
     <rect x="5" y="11" width="1" height="4"/>
     <rect x="9" y="11" width="1" height="4"/>
     <rect x="11" y="11" width="1" height="4"/>
   </g>
+  <!-- 身体（包含呼吸、眨眼、眼睛跟随） -->
   <g id="body-js">
     <g class="breathe-anim">
+      <!-- 躯干 -->
       <rect id="torso" x="2" y="6" width="11" height="7" fill="#DE886D"/>
+      <!-- 左钳子 -->
       <rect x="0" y="9" width="2" height="2" fill="#DE886D"/>
+      <!-- 右钳子 -->
       <rect x="13" y="9" width="2" height="2" fill="#DE886D"/>
+      <!-- 眼睛：跟随手指滑动 + 眨眼 -->
       <g id="eyes-js" fill="#000000">
         <g class="eyes-blink">
           <rect x="4" y="8" width="1" height="2"/>
@@ -57,14 +67,15 @@
 </svg>
 
 <script>
+  // 原生层通过 evaluateJavascript 调用这里的 petEngine
   var petEngine = {
     onTap: function() { react('tap'); },
     onDoubleTap: function() { react('doubletap'); },
-    onLongPress: function() { react('longpress'); },
-    onCombo: function(count) { react('combo', count); }
+    onLongPress: function() { react('longpress'); }
   };
 
-  function react(type, count) {
+  function react(type) {
+    var eyes = document.getElementById('eyes-js');
     var body = document.getElementById('body-js');
 
     if (type === 'tap') {
@@ -77,11 +88,6 @@
       body.style.transform = 'rotate(15deg)';
       setTimeout(function(){ body.style.transform = 'rotate(0)'; }, 300);
       showBubble('？');
-    } else if (type === 'combo') {
-      var msg = count >= 8 ? 'Yuna！' : (count >= 5 ? '别欺负我' : '喜欢你～');
-      showBubble(msg);
-      body.style.transform = count >= 8 ? 'scale(1.3)' : (count >= 5 ? 'scale(1.2)' : 'scale(1.1)');
-      setTimeout(function(){ body.style.transform = 'scale(1)'; }, 200);
     }
   }
 
@@ -92,14 +98,16 @@
     var y = touch.clientY;
     var centerX = window.innerWidth / 2;
     var centerY = window.innerHeight / 2;
+    // 算出偏移量，限制最大 3px，防止眼睛跑飞
     var maxOffset = 3;
     var offsetX = Math.max(-maxOffset, Math.min(maxOffset, (x - centerX) / centerX * maxOffset));
     var offsetY = Math.max(-maxOffset, Math.min(maxOffset, (y - centerY) / centerY * maxOffset));
-    document.getElementById('eyes-js').style.transform =
+    document.getElementById('eyes-js').style.transform = 
       'translate(' + offsetX + 'px, ' + offsetY + 'px)';
   });
 
   document.addEventListener('touchend', function() {
+    // 手指松开，眼睛回到原位
     document.getElementById('eyes-js').style.transform = 'translate(0px, 0px)';
   });
 
