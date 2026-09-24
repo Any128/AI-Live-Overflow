@@ -12,37 +12,29 @@
 <body>
 <svg id="pet" viewBox="0 0 180 240" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
   <g class="face">
-    <!-- 影子：细长灰色半透明长方形，会跟着 face 一起缩放 -->
-    <rect x="40" y="172" width="100" height="4" fill="#000000" opacity="0.2"/>
-
-    <!-- 螃蟹身体（横向的宽方块） -->
-    <rect x="60" y="120" width="60" height="40" fill="#e8735a"/>
-    <!-- 螃蟹头顶的小方块 -->
-    <rect x="70" y="110" width="40" height="10" fill="#e8735a"/>
+    <!-- 螃蟹身体（橘红色像素块） -->
+    <rect x="60" y="110" width="60" height="40" fill="#e8735a"/>
+    <rect x="70" y="100" width="40" height="10" fill="#e8735a"/>
+    <rect x="50" y="120" width="10" height="20" fill="#e8735a"/>
+    <rect x="120" y="120" width="10" height="20" fill="#e8735a"/>
     
-    <!-- 左钳子 -->
-    <rect x="30" y="130" width="20" height="15" fill="#e8735a"/>
-    <rect x="50" y="135" width="10" height="10" fill="#e8735a"/>
-    <!-- 右钳子 -->
-    <rect x="130" y="130" width="20" height="15" fill="#e8735a"/>
-    <rect x="120" y="135" width="10" height="10" fill="#e8735a"/>
-
-    <!-- 螃蟹眼睛（黑色方块） -->
-    <rect x="72" y="122" width="8" height="12" fill="#1a1a1a"/>
-    <rect x="100" y="122" width="8" height="12" fill="#1a1a1a"/>
+    <!-- 螃蟹眼睛（黑色像素块） -->
+    <rect x="75" y="115" width="8" height="12" fill="#1a1a1a"/>
+    <rect x="97" y="115" width="8" height="12" fill="#1a1a1a"/>
     
-    <!-- 螃蟹腿（四只小短腿，从底部伸出来） -->
-    <rect x="65" y="160" width="8" height="12" fill="#e8735a"/>
-    <rect x="78" y="160" width="8" height="12" fill="#e8735a"/>
-    <rect x="94" y="160" width="8" height="12" fill="#e8735a"/>
-    <rect x="107" y="160" width="8" height="12" fill="#e8735a"/>
+    <!-- 螃蟹腿（下方像素块） -->
+    <rect x="70" y="150" width="8" height="15" fill="#e8735a"/>
+    <rect x="82" y="150" width="8" height="15" fill="#e8735a"/>
+    <rect x="94" y="150" width="8" height="15" fill="#e8735a"/>
+    <rect x="106" y="150" width="8" height="15" fill="#e8735a"/>
     
-    <!-- 嘴巴（方块） -->
-    <rect id="mouth" x="85" y="145" width="10" height="4" fill="#1a1a1a"/>
+    <!-- 嘴巴（用一个小块占位） -->
+    <rect id="mouth" x="85" y="138" width="10" height="4" fill="#1a1a1a"/>
   </g>
 </svg>
 
 <script>
+  // 原生层通过 evaluateJavascript 调用这里的 petEngine
   var petEngine = {
     onTap: function() { react('tap'); },
     onDoubleTap: function() { react('doubletap'); },
@@ -54,14 +46,17 @@
     var face = document.querySelector('.face');
 
     if (type === 'tap') {
+      // 单击：嘴巴变成笑
       mouth.setAttribute('width', '14');
       mouth.setAttribute('x', '83');
       showBubble('嘎嘎！');
     } else if (type === 'doubletap') {
+      // 双击：放大一下
       face.style.transform = 'scale(1.15)';
       setTimeout(function(){ face.style.transform = 'scale(1)'; }, 150);
       showBubble('别戳啦！');
     } else if (type === 'longpress') {
+      // 长按：歪一下头
       face.style.transform = 'rotate(15deg)';
       setTimeout(function(){ face.style.transform = 'rotate(0)'; }, 300);
       showBubble('？');
