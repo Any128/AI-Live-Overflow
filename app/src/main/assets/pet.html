@@ -5,21 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   html, body { margin:0; padding:0; background:transparent; }
-  #pet { width:100vw; height:100vh; display:block; }
+  #pet { width:100vw; height:100vh; display:block; image-rendering: pixelated; }
   .face { transition: transform 0.15s ease; transform-origin: center; }
 </style>
 </head>
 <body>
-<svg id="pet" viewBox="0 0 180 240" xmlns="http://www.w3.org/2000/svg">
-  <!-- 占位小生物：圆头 + 眼睛 + 嘴，替换成你自己的 SVG 素材 -->
+<svg id="pet" viewBox="0 0 180 240" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
   <g class="face">
-    <circle cx="90" cy="120" r="70" fill="#ffe0b2" stroke="#d7a86e" stroke-width="4"/>
-    <circle cx="60" cy="110" r="9" fill="#333"/>
-    <circle cx="120" cy="110" r="9" fill="#333"/>
-    <circle cx="60" cy="110" r="3" fill="#fff"/>
-    <circle cx="120" cy="110" r="3" fill="#fff"/>
-    <path id="mouth" d="M 75 145 Q 90 158 105 145" stroke="#333" stroke-width="4"
-          fill="none" stroke-linecap="round"/>
+    <!-- 螃蟹身体（橘红色像素块） -->
+    <rect x="60" y="110" width="60" height="40" fill="#e8735a"/>
+    <rect x="70" y="100" width="40" height="10" fill="#e8735a"/>
+    <rect x="50" y="120" width="10" height="20" fill="#e8735a"/>
+    <rect x="120" y="120" width="10" height="20" fill="#e8735a"/>
+    
+    <!-- 螃蟹眼睛（黑色像素块） -->
+    <rect x="75" y="115" width="8" height="12" fill="#1a1a1a"/>
+    <rect x="97" y="115" width="8" height="12" fill="#1a1a1a"/>
+    
+    <!-- 螃蟹腿（下方像素块） -->
+    <rect x="70" y="150" width="8" height="15" fill="#e8735a"/>
+    <rect x="82" y="150" width="8" height="15" fill="#e8735a"/>
+    <rect x="94" y="150" width="8" height="15" fill="#e8735a"/>
+    <rect x="106" y="150" width="8" height="15" fill="#e8735a"/>
+    
+    <!-- 嘴巴（用一个小块占位） -->
+    <rect id="mouth" x="85" y="138" width="10" height="4" fill="#1a1a1a"/>
   </g>
 </svg>
 
@@ -36,13 +46,17 @@
     var face = document.querySelector('.face');
 
     if (type === 'tap') {
-      mouth.setAttribute('d', 'M 70 145 Q 90 165 110 145');
-      showBubble('嘻嘻');
+      // 单击：嘴巴变成笑
+      mouth.setAttribute('width', '14');
+      mouth.setAttribute('x', '83');
+      showBubble('嘎嘎！');
     } else if (type === 'doubletap') {
+      // 双击：放大一下
       face.style.transform = 'scale(1.15)';
       setTimeout(function(){ face.style.transform = 'scale(1)'; }, 150);
       showBubble('别戳啦！');
     } else if (type === 'longpress') {
+      // 长按：歪一下头
       face.style.transform = 'rotate(15deg)';
       setTimeout(function(){ face.style.transform = 'rotate(0)'; }, 300);
       showBubble('？');
@@ -56,10 +70,10 @@
     b.id = 'bubble';
     b.textContent = text;
     b.style.cssText = 'position:absolute;top:20px;left:50%;transform:translateX(-50%);' +
-      'background:#fff;color:#333;padding:6px 12px;border-radius:14px;font-size:14px;' +
-      'box-shadow:0 2px 8px rgba(0,0,0,0.25);white-space:nowrap;';
+      'background:#fff;color:#333;padding:6px 12px;border-radius:12px;font-size:16px;' +
+      'box-shadow:0 2px 8px rgba(0,0,0,0.2);white-space:nowrap;';
     document.body.appendChild(b);
-    setTimeout(function(){ if (b.parentNode) b.remove(); }, 1500);
+    setTimeout(function(){ b.remove(); }, 2000);
   }
 </script>
 </body>
