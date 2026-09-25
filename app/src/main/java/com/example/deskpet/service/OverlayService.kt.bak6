@@ -165,21 +165,13 @@ class OverlayService : Service() {
                     val speed = if (duration > 0) distance / duration * 1000 else 0.0
 
                     if (hasMoved && speed > 1500) {
-                        // === Fling：甩出去，切到 error，再弹回来 ===
                         params?.x = (params?.x ?: 0) + (dx * 1.5).toInt()
                         params?.y = (params?.y ?: 0) + (dy * 1.5).toInt()
                         windowManager?.updateViewLayout(overlayView, params)
-                        setMood("error")
                         overlayView?.postDelayed({
                             params?.x = initialX
                             params?.y = initialY
                             windowManager?.updateViewLayout(overlayView, params)
-                            // 再等 1 秒恢复当前 App 对应状态
-                            handler.postDelayed({
-                                val pkg = getForegroundPackage() ?: return@postDelayed
-                                val mood = APP_MOOD[pkg] ?: "idle"
-                                setMood(mood)
-                            }, 1000)
                         }, 300)
                     } else if (!hasMoved) {
                         val now = System.currentTimeMillis()
@@ -207,7 +199,7 @@ class OverlayService : Service() {
         }
     }
 
-    // 单击：气泡 + 打断动作，1.5 秒后恢复
+    // 单击：气泡 + 打断动作
     private fun onTap() {
         overlayView?.evaluateJavascript("window.petEngine && window.petEngine.onTap()", null)
         setMood("idle")
