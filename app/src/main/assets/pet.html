@@ -15,22 +15,20 @@
 
   <!-- ========== 1. 待机：左顾右盼 ========== -->
   <svg class="mood active" id="mood-idle" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <style>
-        .idle-body { transform-origin: 7.5px 13px; animation: idle-body 10s infinite ease-in-out; }
-        .idle-breathe { transform-origin: 7.5px 13px; animation: idle-breathe 3.2s infinite ease-in-out; }
-        .idle-shadow { transform-origin: 7.5px 15.5px; animation: idle-shadow 10s infinite ease-in-out; }
-        .idle-arm-l { transform-origin: 1px 10px; animation: idle-arm-l 10s infinite ease-in-out; }
-        .idle-eyes-look { animation: idle-eye-track 10s infinite ease-in-out; }
-        .idle-eyes-blink { transform-origin: 7.5px 9px; animation: idle-eye-blink 10s infinite linear; }
-        @keyframes idle-breathe { 0%,100% { transform: scale(1,1) translate(0,0);} 50% { transform: scale(1.02,0.98) translate(0,0.5px);} }
-        @keyframes idle-body { 0%,8%,25%,30%,40%,45%,60%,100% { transform: scale(1,1) translate(0,0);} 12%,22% { transform: scale(1,1) translate(1px,0);} 48%,57% { transform: scale(1,1) translate(-1px,0);} 33%,38% { transform: scale(1,1) translate(0.5px,0);} }
-        @keyframes idle-shadow { 0%,8%,25%,30%,40%,45%,60%,100% { transform: scaleX(1) translate(0,0); opacity:0.5;} 12%,22% { transform: scaleX(1) translate(1px,0); opacity:0.5;} 48%,57% { transform: scaleX(1) translate(-1px,0); opacity:0.5;} 33%,38% { transform: scaleX(1) translate(0.5px,0); opacity:0.5;} }
-        @keyframes idle-eye-track { 0%,10%,25%,43%,60%,100% { transform: translate(0,0);} 12%,22% { transform: translate(3px,0);} 48%,57% { transform: translate(-3px,0);} }
-        @keyframes idle-eye-blink { 0%,3%,7%,18%,22%,47%,51%,78%,82%,100% { transform: scaleY(1);} 5%,20%,49%,80% { transform: scaleY(0.1);} }
-        @keyframes idle-arm-l { 0%,30% { transform: translate(0,0) rotate(0deg);} 33% { transform: translate(1px,-3px) rotate(15deg);} 34% { transform: translate(1.5px,-4px) rotate(35deg);} 35% { transform: translate(0.5px,-2.5px) rotate(0deg);} 36% { transform: translate(1.5px,-4px) rotate(35deg);} 37% { transform: translate(0.5px,-2.5px) rotate(0deg);} 38% { transform: translate(1.5px,-4px) rotate(35deg);} 39% { transform: translate(0.5px,-2.5px) rotate(0deg);} 42%,100% { transform: translate(0,0) rotate(0deg);} }
-      </style>
-    </defs>
+    <defs><style>
+      .idle-body { transform-origin: 7.5px 13px; animation: idle-body 10s infinite ease-in-out; }
+      .idle-breathe { transform-origin: 7.5px 13px; animation: idle-breathe 3.2s infinite ease-in-out; }
+      .idle-shadow { transform-origin: 7.5px 15.5px; animation: idle-shadow 10s infinite ease-in-out; }
+      .idle-arm-l { transform-origin: 1px 10px; animation: idle-arm-l 10s infinite ease-in-out; }
+      .idle-eyes-look { animation: idle-eye-track 10s infinite ease-in-out; }
+      .idle-eyes-blink { transform-origin: 7.5px 9px; animation: idle-eye-blink 10s infinite linear; }
+      @keyframes idle-breathe { 0%,100% { transform: scale(1,1) translate(0,0);} 50% { transform: scale(1.02,0.98) translate(0,0.5px);} }
+      @keyframes idle-body { 0%,8%,25%,30%,40%,45%,60%,100% { transform: scale(1,1) translate(0,0);} 12%,22% { transform: scale(1,1) translate(1px,0);} 48%,57% { transform: scale(1,1) translate(-1px,0);} 33%,38% { transform: scale(1,1) translate(0.5px,0);} }
+      @keyframes idle-shadow { 0%,8%,25%,30%,40%,45%,60%,100% { transform: scaleX(1) translate(0,0); opacity:0.5;} 12%,22% { transform: scaleX(1) translate(1px,0); opacity:0.5;} 48%,57% { transform: scaleX(1) translate(-1px,0); opacity:0.5;} 33%,38% { transform: scaleX(1) translate(0.5px,0); opacity:0.5;} }
+      @keyframes idle-eye-track { 0%,10%,25%,43%,60%,100% { transform: translate(0,0);} 12%,22% { transform: translate(3px,0);} 48%,57% { transform: translate(-3px,0);} }
+      @keyframes idle-eye-blink { 0%,3%,7%,18%,22%,47%,51%,78%,82%,100% { transform: scaleY(1);} 5%,20%,49%,80% { transform: scaleY(0.1);} }
+      @keyframes idle-arm-l { 0%,30% { transform: translate(0,0) rotate(0deg);} 33% { transform: translate(1px,-3px) rotate(15deg);} 34% { transform: translate(1.5px,-4px) rotate(35deg);} 35% { transform: translate(0.5px,-2.5px) rotate(0deg);} 36% { transform: translate(1.5px,-4px) rotate(35deg);} 37% { transform: translate(0.5px,-2.5px) rotate(0deg);} 38% { transform: translate(1.5px,-4px) rotate(35deg);} 39% { transform: translate(0.5px,-2.5px) rotate(0deg);} 42%,100% { transform: translate(0,0) rotate(0deg);} }
+    </style></defs>
     <rect class="idle-shadow" x="3" y="15" width="9" height="1" fill="#000" opacity="0.5"/>
     <g fill="#DE886D">
       <rect x="3" y="12" width="1" height="3"/><rect x="5" y="12" width="1" height="3"/>
@@ -46,64 +44,46 @@
     </g></g>
   </svg>
 
-  <!-- ========== 2. 思考 ========== -->
-  <svg class="mood" id="mood-thinking" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <style>
-        #think-shadow { transform-box: view-box; transform-origin: 7.5px 15.5px; animation: think-shadow 12s infinite ease-in-out; }
-        .think-breathe { transform-box: view-box; transform-origin: 7.5px 13px; animation: think-breathe 12s infinite ease-in-out; }
-        .think-attend { transform-box: view-box; transform-origin: 7.5px 13px; animation: think-attend 12s infinite ease-in-out; }
-        .think-arm-l { transform-box: fill-box; transform-origin: 100% 0%; animation: think-arm-l 12s infinite ease-in-out; }
-        .think-arm-r { transform-box: fill-box; transform-origin: 0% 0%; animation: think-arm-r 12s infinite ease-in-out; }
-        .think-eyes { transform-box: view-box; transform-origin: 7.5px 9px; animation: think-eyes 12s infinite ease-in-out; }
-        .think-left-bubble { transform-box: fill-box; transform-origin: 50% 100%; opacity: 0; animation: think-left-bubble 12s infinite ease-in-out; }
-        .think-right-bubble { transform-box: fill-box; transform-origin: 50% 100%; opacity: 0; animation: think-right-bubble 12s infinite ease-in-out; }
-        .think-dot { opacity: 0; }
-        .think-left-bubble .td1 { animation: think-left-dot1 12s infinite step-end; }
-        .think-left-bubble .td2 { animation: think-left-dot2 12s infinite step-end; }
-        .think-left-bubble .td3 { animation: think-left-dot3 12s infinite step-end; }
-        .think-right-bubble .td1 { animation: think-right-dot1 12s infinite step-end; }
-        .think-right-bubble .td2 { animation: think-right-dot2 12s infinite step-end; }
-        .think-right-bubble .td3 { animation: think-right-dot3 12s infinite step-end; }
-        @keyframes think-shadow { 0%,3%,52%,99%,100% { opacity:0.5; transform: translateX(0) scaleX(1);} 15%,43% { opacity:0.4; transform: translateX(-0.28px) scaleX(0.9);} 70%,96% { opacity:0.4; transform: translateX(0.28px) scaleX(0.9);} }
-        @keyframes think-breathe { 0%,3%,52%,99%,100% { transform: scale(1,1) translateY(0);} 15%,29%,43%,70%,84%,96% { transform: scale(1.006,0.994) translateY(0.08px);} 22%,36%,64%,78%,90% { transform: scale(1.014,0.986) translateY(0.18px);} 54% { transform: scale(0.996,1.004) translateY(-0.08px);} }
-        @keyframes think-attend { 0%,3%,52%,99%,100% { transform: translate(0,0) rotate(0deg);} 7% { transform: translate(-0.3px,0.08px) rotate(-1.6deg);} 15% { transform: translate(-0.48px,0.14px) rotate(-2.6deg);} 30% { transform: translate(-0.45px,0.1px) rotate(-2.3deg);} 42% { transform: translate(-0.4px,0.08px) rotate(-2.0deg);} 49% { transform: translate(-0.2px,0.04px) rotate(-0.8deg);} 51% { transform: translate(-0.05px,0) rotate(-0.2deg);} 54% { transform: translate(0,0.08px) rotate(0deg);} 58% { transform: translate(0.3px,0.08px) rotate(1.6deg);} 70% { transform: translate(0.48px,0.14px) rotate(2.6deg);} 84% { transform: translate(0.45px,0.1px) rotate(2.3deg);} 96% { transform: translate(0.32px,0.06px) rotate(1.4deg);} 98% { transform: translate(0.05px,0) rotate(0.2deg);} }
-        @keyframes think-arm-l { 0%,3%,52%,99%,100% { transform: translate(0,0) rotate(0deg);} 7% { transform: translate(0.18px,-0.7px) rotate(14deg);} 15%,49% { transform: translate(0.35px,-1.05px) rotate(22deg);} 30% { transform: translate(0.28px,-0.92px) rotate(26deg);} 58%,96% { transform: translate(-0.08px,0.45px) rotate(0deg);} 84% { transform: translate(-0.12px,0.55px) rotate(0deg);} }
-        @keyframes think-arm-r { 0%,3%,52%,99%,100% { transform: translate(0,0) rotate(0deg);} 7%,49% { transform: translate(0.08px,0.45px) rotate(0deg);} 30% { transform: translate(0.12px,0.55px) rotate(0deg);} 58% { transform: translate(-0.18px,-0.7px) rotate(-14deg);} 70%,96% { transform: translate(-0.35px,-1.05px) rotate(-22deg);} 84% { transform: translate(-0.28px,-0.92px) rotate(-26deg);} }
-        @keyframes think-eyes { 0%,3%,52%,99%,100% { transform: translate(0,0) scaleY(1);} 5% { transform: translate(-0.3px,-0.5px) scaleY(0.95);} 9%,42% { transform: translate(-0.45px,-0.78px) scaleY(0.85);} 43% { transform: translate(-0.45px,-0.78px) scaleY(0.12);} 44%,47% { transform: translate(-0.45px,-0.78px) scaleY(1);} 48% { transform: translate(-0.45px,-0.78px) scaleY(0.12);} 50% { transform: translate(-0.15px,-0.25px) scaleY(0.95);} 54% { transform: translate(0,0) scaleY(0.18);} 55% { transform: translate(0.3px,-0.5px) scaleY(0.95);} 59%,88% { transform: translate(0.45px,-0.78px) scaleY(0.85);} 92% { transform: translate(0.45px,-0.78px) scaleY(0.12);} 93%,96% { transform: translate(0.45px,-0.78px) scaleY(1);} 97% { transform: translate(0.45px,-0.78px) scaleY(0.12);} 98% { transform: translate(0.2px,-0.4px) scaleY(0.95);} 100% { transform: translate(0,0) scaleY(1);} }
-        @keyframes think-left-bubble { 0%,3% { opacity:0; transform: translate(-0.2px,0.7px) scale(0.82);} 5% { opacity:0.75; transform: translate(-0.1px,0.25px) scale(0.94);} 7% { opacity:1; transform: translate(0,0) scale(1.04);} 10%,43% { opacity:1; transform: translate(0,0) scale(1);} 46% { opacity:1; transform: translate(0,-0.2px) scale(1.02);} 48% { opacity:1; transform: translate(0,-0.18px) scale(1.01);} 49% { opacity:1; transform: translate(0,0) scale(1);} 52% { opacity:0; transform: translate(0,0.65px) scale(0.9);} 53%,100% { opacity:0; transform: translate(0,0.65px) scale(0.9);} }
-        @keyframes think-right-bubble { 0%,53% { opacity:0; transform: translate(0.2px,0.7px) scale(0.82);} 54% { opacity:0.75; transform: translate(0.1px,0.25px) scale(0.94);} 58% { opacity:1; transform: translate(0,0) scale(1.04);} 61%,92% { opacity:1; transform: translate(0,0) scale(1);} 94% { opacity:1; transform: translate(0,-0.2px) scale(1.02);} 96% { opacity:1; transform: translate(0,-0.18px) scale(1.01);} 97% { opacity:1; transform: translate(0,0) scale(1);} 99% { opacity:0; transform: translate(0,0.65px) scale(0.9);} 100% { opacity:0; transform: translate(0,0.65px) scale(0.9);} }
-        @keyframes think-left-dot1 { 0%,7.99%,17.99%,19.99%,29.99%,31.99%,48.99%,100% { opacity:0;} 8%,17.98%,20%,29.98%,32%,48.98% { opacity:1;} }
-        @keyframes think-left-dot2 { 0%,11.99%,17.99%,23.99%,29.99%,35.99%,48.99%,100% { opacity:0;} 12%,17.98%,24%,29.98%,36%,48.98% { opacity:1;} }
-        @keyframes think-left-dot3 { 0%,15.99%,17.99%,27.99%,29.99%,39.99%,48.99%,100% { opacity:0;} 16%,17.98%,28%,29.98%,40%,48.98% { opacity:1;} }
-        @keyframes think-right-dot1 { 0%,58.99%,68.99%,70.99%,80.99%,82.99%,98.49%,100% { opacity:0;} 59%,68.98%,71%,80.98%,83%,98.48% { opacity:1;} }
-        @keyframes think-right-dot2 { 0%,62.99%,68.99%,74.99%,80.99%,86.99%,98.49%,100% { opacity:0;} 63%,68.98%,75%,80.98%,87%,98.48% { opacity:1;} }
-        @keyframes think-right-dot3 { 0%,66.99%,68.99%,78.99%,80.99%,90.99%,98.49%,100% { opacity:0;} 67%,68.98%,79%,80.98%,91%,98.48% { opacity:1;} }
-      </style>
-    </defs>
-    <rect id="think-shadow" x="3" y="15" width="9" height="1" fill="#000" opacity="0.5"/>
-    <g class="think-breathe"><g class="think-attend">
+  <!-- ========== 2. 吹泡泡 ========== -->
+  <svg class="mood" id="mood-idle-bubble" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
+    <style>
+      .bub-squash { transform-origin: 7.5px 15px; animation: bub-squash 4.5s linear infinite; }
+      .bub-eyes { transform-origin: 7.5px 9px; animation: bub-eyes 4.5s linear infinite; }
+      .bub-arm-r { animation: bub-arm-r 4.5s linear infinite; }
+      .bub-arm-l { animation: bub-arm-l 4.5s linear infinite; }
+      .bub-wand { animation: bub-wand 4.5s linear infinite; }
+      .bub-b1 { animation: bub-b1 4.5s linear infinite; }
+      .bub-b2 { animation: bub-b2 4.5s linear infinite; }
+      @keyframes bub-squash { 0%,30% { transform: scaleY(1);} 36% { transform: scaleY(0.93);} 42% { transform: scaleY(1.05);} 50%,100% { transform: scaleY(1);} }
+      @keyframes bub-eyes { 0%,6% { transform: translate(0,0) scaleY(1);} 18%,30% { transform: translate(1px,0) scaleY(1);} 34% { transform: translate(1px,0) scaleY(0.5);} 42%,46% { transform: translate(1px,0) scaleY(1);} 66%,86% { transform: translate(1.5px,-0.5px) scaleY(1);} 88% { transform: translate(1.5px,-0.5px) scaleY(0.1);} 90% { transform: translate(1.5px,-0.5px) scaleY(1);} 94% { transform: translate(0,0) scaleY(1);} 96% { transform: translate(0,0) scaleY(0.1);} 98%,100% { transform: translate(0,0) scaleY(1);} }
+      @keyframes bub-arm-r { 0%,6% { transform: translate(0,0);} 18%,86% { transform: translate(0.45px,0.55px);} 94%,100% { transform: translate(0,0);} }
+      @keyframes bub-arm-l { 0%,6% { transform: translate(0,0);} 18%,86% { transform: translate(0,1px);} 94%,100% { transform: translate(0,0);} }
+      @keyframes bub-wand { 0%,16% { opacity:0; transform: scale(0.5);} 26%,86% { opacity:1; transform: scale(1);} 92%,100% { opacity:0; transform: scale(0.5);} }
+      @keyframes bub-b1 { 0%,42% { opacity:0; transform: translate(0,0) scale(0);} 46% { opacity:1; transform: translate(0,-0.3px) scale(0.3);} 52% { opacity:1; transform: translate(0.5px,-1.5px) scale(0.5);} 58% { opacity:1; transform: translate(1.5px,-3.5px) scale(0.7);} 64% { opacity:1; transform: translate(3px,-6px) scale(0.92);} 68% { opacity:1; transform: translate(4.1px,-8.45px) scale(1);} 70% { opacity:0.6; transform: translate(4.1px,-8.45px) scale(1.2);} 72%,99% { opacity:0; transform: translate(4.1px,-8.45px) scale(1.4);} 100% { opacity:0; transform: translate(0,0) scale(0);} }
+      @keyframes bub-b2 { 0%,58% { opacity:0; transform: translate(0,0) scale(0);} 62% { opacity:1; transform: translate(0,-0.3px) scale(0.3);} 68% { opacity:1; transform: translate(0.8px,-1.3px) scale(0.5);} 74% { opacity:1; transform: translate(2.5px,-3px) scale(0.65);} 80% { opacity:1; transform: translate(5px,-4.8px) scale(0.85);} 84% { opacity:1; transform: translate(7.1px,-6.3px) scale(1);} 86% { opacity:0.5; transform: translate(7.1px,-6.3px) scale(1.2);} 88%,99% { opacity:0; transform: translate(7.1px,-6.3px) scale(1.4);} 100% { opacity:0; transform: translate(0,0) scale(0);} }
+    </style>
+    <rect x="3" y="15" width="9" height="1" fill="#000" opacity="0.5"/>
+    <g class="bub-squash">
       <g fill="#DE886D">
         <rect x="2" y="6" width="11" height="7"/>
-        <rect class="think-arm-l" x="0" y="9" width="2" height="2"/>
-        <rect class="think-arm-r" x="13" y="9" width="2" height="2"/>
+        <g class="bub-arm-l"><rect x="0" y="9" width="2" height="2"/></g>
+        <rect x="3" y="13" width="1" height="2"/><rect x="5" y="13" width="1" height="2"/>
+        <rect x="9" y="13" width="1" height="2"/><rect x="11" y="13" width="1" height="2"/>
       </g>
-      <g class="think-eyes" fill="#000">
+      <g class="bub-eyes" fill="#000">
         <rect x="4" y="8" width="1" height="2"/><rect x="10" y="8" width="1" height="2"/>
       </g>
+    </g>
+    <g class="bub-arm-r"><rect x="13" y="9" width="2" height="2" fill="#DE886D"/></g>
+    <g transform="translate(14.45 10.55)"><g class="bub-wand">
+      <rect x="0.06" y="-2.075" width="0.8" height="2.6" rx="0.4" fill="#3A2926"/>
     </g></g>
-    <g class="think-left-bubble">
-      <path d="M-1 -4 H6 V-3 H7 V2 H6 V3 H-1 V2 H-2 V-3 H-1 Z" fill="#FFF"/>
-      <rect class="think-dot td1" x="0" y="-1" width="1" height="1" fill="#256891"/>
-      <rect class="think-dot td2" x="2" y="-1" width="1" height="1" fill="#256891"/>
-      <rect class="think-dot td3" x="4" y="-1" width="1" height="1" fill="#256891"/>
-    </g>
-    <g class="think-right-bubble">
-      <path d="M9 -4 H16 V-3 H17 V2 H16 V3 H9 V2 H8 V-3 H9 Z" fill="#FFF"/>
-      <rect class="think-dot td1" x="10" y="-1" width="1" height="1" fill="#256891"/>
-      <rect class="think-dot td2" x="12" y="-1" width="1" height="1" fill="#256891"/>
-      <rect class="think-dot td3" x="14" y="-1" width="1" height="1" fill="#256891"/>
-    </g>
+    <g transform="translate(14.9 7.25)"><g class="bub-b1">
+      <circle r="3.05" fill="#F7FFFF" fill-opacity="0.12" stroke="#C7E6E8" stroke-width="0.24"/>
+    </g></g>
+    <g transform="translate(14.9 7.25)"><g class="bub-b2">
+      <circle r="1.55" fill="#FFF9F4" fill-opacity="0.13" stroke="#E4D2C8" stroke-width="0.2"/>
+    </g></g>
   </svg>
 
   <!-- ========== 3. 高兴 ========== -->
@@ -143,7 +123,101 @@
     </g>
   </svg>
 
-  <!-- ========== 4. 吃醋（晕） ========== -->
+  <!-- ========== 4. 向右看 ========== -->
+  <svg class="mood" id="mood-react-right" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
+    <defs><style>
+      .rr-body { transform-origin: 7.5px 15px; animation: rr-body 2.5s 1 ease-in-out forwards; }
+      .rr-eyes { animation: rr-eyes 2.5s 1 ease-in-out forwards; }
+      .rr-blink { transform-origin: 7.5px 9px; animation: rr-blink 3s infinite linear; }
+      .rr-q { transform-origin: center; animation: rr-q 2.5s 1 ease-in-out forwards; opacity:0; }
+      .rr-arm { animation: rr-arm 2.5s 1 ease-in-out forwards; }
+      @keyframes rr-arm { 0%,8% { transform: none;} 16%,56% { transform: translate(1px,-2px) rotate(-15deg);} 84%,100% { transform: none;} }
+      @keyframes rr-body { 0%,8% { transform: translate(0,0);} 16%,56% { transform: translate(2px,0) rotate(2deg);} 84%,100% { transform: translate(0,0);} }
+      @keyframes rr-eyes { 0%,8% { transform: translate(0,0);} 16%,56% { transform: translate(3px,0);} 84%,100% { transform: translate(0,0);} }
+      @keyframes rr-blink { 0%,13%,17%,80%,84%,100% { transform: scaleY(1);} 15%,82% { transform: scaleY(0.1);} }
+      @keyframes rr-q { 0%,12% { opacity:0; transform: translate(6px,6px) scale(0.5);} 22%,48% { opacity:1; transform: translate(8px,-2px) scale(1);} 64%,100% { opacity:0; transform: translate(8px,-8px) scale(1.2);} }
+    </style></defs>
+    <rect x="3" y="15" width="9" height="1" fill="#000" opacity="0.5"/>
+    <g fill="#DE886D">
+      <rect x="3" y="13" width="1" height="2"/><rect x="5" y="13" width="1" height="2"/>
+      <rect x="9" y="13" width="1" height="2"/><rect x="11" y="13" width="1" height="2"/>
+    </g>
+    <g class="rr-body">
+      <g fill="#DE886D">
+        <rect x="2" y="6" width="11" height="7"/>
+        <rect x="0" y="9" width="2" height="2"/>
+        <g class="rr-arm"><rect x="13" y="9" width="2" height="2"/></g>
+      </g>
+      <g class="rr-eyes"><g class="rr-blink" fill="#000">
+        <rect x="4" y="8" width="1" height="2"/><rect x="10" y="8" width="1" height="2"/>
+      </g></g>
+    </g>
+    <g class="rr-q" fill="#FFC107" transform="translate(10,0)">
+      <rect x="1" y="0" width="2" height="1"/><rect x="0" y="1" width="1" height="1"/>
+      <rect x="3" y="1" width="1" height="2"/><rect x="2" y="3" width="1" height="1"/>
+      <rect x="1" y="4" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/>
+    </g>
+  </svg>
+
+  <!-- ========== 5. 思考 ========== -->
+  <svg class="mood" id="mood-thinking" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
+    <defs><style>
+      #think-shadow { transform-box: view-box; transform-origin: 7.5px 15.5px; animation: think-shadow 12s infinite ease-in-out; }
+      .think-breathe { transform-box: view-box; transform-origin: 7.5px 13px; animation: think-breathe 12s infinite ease-in-out; }
+      .think-attend { transform-box: view-box; transform-origin: 7.5px 13px; animation: think-attend 12s infinite ease-in-out; }
+      .think-arm-l { transform-box: fill-box; transform-origin: 100% 0%; animation: think-arm-l 12s infinite ease-in-out; }
+      .think-arm-r { transform-box: fill-box; transform-origin: 0% 0%; animation: think-arm-r 12s infinite ease-in-out; }
+      .think-eyes { transform-box: view-box; transform-origin: 7.5px 9px; animation: think-eyes 12s infinite ease-in-out; }
+      .think-left-bubble { transform-box: fill-box; transform-origin: 50% 100%; opacity:0; animation: think-left-bubble 12s infinite ease-in-out; }
+      .think-right-bubble { transform-box: fill-box; transform-origin: 50% 100%; opacity:0; animation: think-right-bubble 12s infinite ease-in-out; }
+      .think-dot { opacity:0; }
+      .think-left-bubble .td1 { animation: think-left-dot1 12s infinite step-end; }
+      .think-left-bubble .td2 { animation: think-left-dot2 12s infinite step-end; }
+      .think-left-bubble .td3 { animation: think-left-dot3 12s infinite step-end; }
+      .think-right-bubble .td1 { animation: think-right-dot1 12s infinite step-end; }
+      .think-right-bubble .td2 { animation: think-right-dot2 12s infinite step-end; }
+      .think-right-bubble .td3 { animation: think-right-dot3 12s infinite step-end; }
+      @keyframes think-shadow { 0%,3%,52%,99%,100% { opacity:0.5; transform: translateX(0) scaleX(1);} 15%,43% { opacity:0.4; transform: translateX(-0.28px) scaleX(0.9);} 70%,96% { opacity:0.4; transform: translateX(0.28px) scaleX(0.9);} }
+      @keyframes think-breathe { 0%,3%,52%,99%,100% { transform: scale(1,1) translateY(0);} 15%,29%,43%,70%,84%,96% { transform: scale(1.006,0.994) translateY(0.08px);} 22%,36%,64%,78%,90% { transform: scale(1.014,0.986) translateY(0.18px);} 54% { transform: scale(0.996,1.004) translateY(-0.08px);} }
+      @keyframes think-attend { 0%,3%,52%,99%,100% { transform: translate(0,0) rotate(0);} 7% { transform: translate(-0.3px,0.08px) rotate(-1.6deg);} 15% { transform: translate(-0.48px,0.14px) rotate(-2.6deg);} 30% { transform: translate(-0.45px,0.1px) rotate(-2.3deg);} 42% { transform: translate(-0.4px,0.08px) rotate(-2.0deg);} 49% { transform: translate(-0.2px,0.04px) rotate(-0.8deg);} 51% { transform: translate(-0.05px,0) rotate(-0.2deg);} 54% { transform: translate(0,0.08px) rotate(0);} 58% { transform: translate(0.3px,0.08px) rotate(1.6deg);} 70% { transform: translate(0.48px,0.14px) rotate(2.6deg);} 84% { transform: translate(0.45px,0.1px) rotate(2.3deg);} 96% { transform: translate(0.32px,0.06px) rotate(1.4deg);} 98% { transform: translate(0.05px,0) rotate(0.2deg);} }
+      @keyframes think-arm-l { 0%,3%,52%,99%,100% { transform: translate(0,0) rotate(0);} 7% { transform: translate(0.18px,-0.7px) rotate(14deg);} 15%,49% { transform: translate(0.35px,-1.05px) rotate(22deg);} 30% { transform: translate(0.28px,-0.92px) rotate(26deg);} 58%,96% { transform: translate(-0.08px,0.45px) rotate(0);} 84% { transform: translate(-0.12px,0.55px) rotate(0);} }
+      @keyframes think-arm-r { 0%,3%,52%,99%,100% { transform: translate(0,0) rotate(0);} 7%,49% { transform: translate(0.08px,0.45px) rotate(0);} 30% { transform: translate(0.12px,0.55px) rotate(0);} 58% { transform: translate(-0.18px,-0.7px) rotate(-14deg);} 70%,96% { transform: translate(-0.35px,-1.05px) rotate(-22deg);} 84% { transform: translate(-0.28px,-0.92px) rotate(-26deg);} }
+      @keyframes think-eyes { 0%,3%,52%,99%,100% { transform: translate(0,0) scaleY(1);} 5% { transform: translate(-0.3px,-0.5px) scaleY(0.95);} 9%,42% { transform: translate(-0.45px,-0.78px) scaleY(0.85);} 43% { transform: translate(-0.45px,-0.78px) scaleY(0.12);} 44%,47% { transform: translate(-0.45px,-0.78px) scaleY(1);} 48% { transform: translate(-0.45px,-0.78px) scaleY(0.12);} 50% { transform: translate(-0.15px,-0.25px) scaleY(0.95);} 54% { transform: translate(0,0) scaleY(0.18);} 55% { transform: translate(0.3px,-0.5px) scaleY(0.95);} 59%,88% { transform: translate(0.45px,-0.78px) scaleY(0.85);} 92% { transform: translate(0.45px,-0.78px) scaleY(0.12);} 93%,96% { transform: translate(0.45px,-0.78px) scaleY(1);} 97% { transform: translate(0.45px,-0.78px) scaleY(0.12);} 98% { transform: translate(0.2px,-0.4px) scaleY(0.95);} 100% { transform: translate(0,0) scaleY(1);} }
+      @keyframes think-left-bubble { 0%,3% { opacity:0; transform: translate(-0.2px,0.7px) scale(0.82);} 5% { opacity:0.75; transform: translate(-0.1px,0.25px) scale(0.94);} 7% { opacity:1; transform: translate(0,0) scale(1.04);} 10%,43% { opacity:1; transform: translate(0,0) scale(1);} 46% { opacity:1; transform: translate(0,-0.2px) scale(1.02);} 48% { opacity:1; transform: translate(0,-0.18px) scale(1.01);} 49% { opacity:1; transform: translate(0,0) scale(1);} 52% { opacity:0; transform: translate(0,0.65px) scale(0.9);} 53%,100% { opacity:0; transform: translate(0,0.65px) scale(0.9);} }
+      @keyframes think-right-bubble { 0%,53% { opacity:0; transform: translate(0.2px,0.7px) scale(0.82);} 54% { opacity:0.75; transform: translate(0.1px,0.25px) scale(0.94);} 58% { opacity:1; transform: translate(0,0) scale(1.04);} 61%,92% { opacity:1; transform: translate(0,0) scale(1);} 94% { opacity:1; transform: translate(0,-0.2px) scale(1.02);} 96% { opacity:1; transform: translate(0,-0.18px) scale(1.01);} 97% { opacity:1; transform: translate(0,0) scale(1);} 99% { opacity:0; transform: translate(0,0.65px) scale(0.9);} 100% { opacity:0; transform: translate(0,0.65px) scale(0.9);} }
+      @keyframes think-left-dot1 { 0%,7.99%,17.99%,19.99%,29.99%,31.99%,48.99%,100% { opacity:0;} 8%,17.98%,20%,29.98%,32%,48.98% { opacity:1;} }
+      @keyframes think-left-dot2 { 0%,11.99%,17.99%,23.99%,29.99%,35.99%,48.99%,100% { opacity:0;} 12%,17.98%,24%,29.98%,36%,48.98% { opacity:1;} }
+      @keyframes think-left-dot3 { 0%,15.99%,17.99%,27.99%,29.99%,39.99%,48.99%,100% { opacity:0;} 16%,17.98%,28%,29.98%,40%,48.98% { opacity:1;} }
+      @keyframes think-right-dot1 { 0%,58.99%,68.99%,70.99%,80.99%,82.99%,98.49%,100% { opacity:0;} 59%,68.98%,71%,80.98%,83%,98.48% { opacity:1;} }
+      @keyframes think-right-dot2 { 0%,62.99%,68.99%,74.99%,80.99%,86.99%,98.49%,100% { opacity:0;} 63%,68.98%,75%,80.98%,87%,98.48% { opacity:1;} }
+      @keyframes think-right-dot3 { 0%,66.99%,68.99%,78.99%,80.99%,90.99%,98.49%,100% { opacity:0;} 67%,68.98%,79%,80.98%,91%,98.48% { opacity:1;} }
+    </style></defs>
+    <rect id="think-shadow" x="3" y="15" width="9" height="1" fill="#000" opacity="0.5"/>
+    <g class="think-breathe"><g class="think-attend">
+      <g fill="#DE886D">
+        <rect x="2" y="6" width="11" height="7"/>
+        <rect class="think-arm-l" x="0" y="9" width="2" height="2"/>
+        <rect class="think-arm-r" x="13" y="9" width="2" height="2"/>
+      </g>
+      <g class="think-eyes" fill="#000">
+        <rect x="4" y="8" width="1" height="2"/><rect x="10" y="8" width="1" height="2"/>
+      </g>
+    </g></g>
+    <g class="think-left-bubble">
+      <path d="M-1 -4 H6 V-3 H7 V2 H6 V3 H-1 V2 H-2 V-3 H-1 Z" fill="#FFF"/>
+      <rect class="think-dot td1" x="0" y="-1" width="1" height="1" fill="#256891"/>
+      <rect class="think-dot td2" x="2" y="-1" width="1" height="1" fill="#256891"/>
+      <rect class="think-dot td3" x="4" y="-1" width="1" height="1" fill="#256891"/>
+    </g>
+    <g class="think-right-bubble">
+      <path d="M9 -4 H16 V-3 H17 V2 H16 V3 H9 V2 H8 V-3 H9 Z" fill="#FFF"/>
+      <rect class="think-dot td1" x="10" y="-1" width="1" height="1" fill="#256891"/>
+      <rect class="think-dot td2" x="12" y="-1" width="1" height="1" fill="#256891"/>
+      <rect class="think-dot td3" x="14" y="-1" width="1" height="1" fill="#256891"/>
+    </g>
+  </svg>
+
+  <!-- ========== 6. 吃醋（晕） ========== -->
   <svg class="mood" id="mood-dizzy" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
     <style>
       .dizzy-upper { transform-box: view-box; transform-origin: 7.5px 13px; animation: dizzy-body 3s linear infinite; }
@@ -183,7 +257,7 @@
     </g>
   </svg>
 
-  <!-- ========== 5. 听歌 ========== -->
+  <!-- ========== 7. 听歌 ========== -->
   <svg class="mood" id="mood-music" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
     <style>
       .music-shadow { transform-box: fill-box; transform-origin: 50% 50%; animation: music-shadow 1.6s infinite ease-in-out; }
@@ -241,30 +315,28 @@
     <g transform="translate(15 4)"><g class="music-note-r" fill="#FFE066"><rect x="0" y="2" width="1" height="1"/><rect x="1" y="0" width="1" height="3"/><rect x="2" y="0" width="1" height="1"/></g></g>
   </svg>
 
-  <!-- ========== 6. 看书 ========== -->
+  <!-- ========== 8. 看书 ========== -->
   <svg class="mood" id="mood-reading" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <style>
-        .read-breathe { transform-origin: 7.5px 13px; animation: read-breathe 3.2s infinite ease-in-out; }
-        .read-blink { transform-origin: 7.5px 9px; animation: read-blink 5s infinite; }
-        .read-shadow { transform-origin: 7.5px 15.5px; animation: read-shadow 3.2s infinite ease-in-out; }
-        .read-body { animation: read-body 14s infinite ease-in-out; }
-        .read-arm-l { transform-origin: 2px 10px; animation: read-arm-l 14s infinite ease-in-out; }
-        .read-arm-r { animation: read-arm-r 14s infinite ease-in-out; }
-        .read-book { opacity:0; transform-origin: 7px 11.5px; animation: read-book 14s infinite ease-in-out; }
-        .read-eyes { animation: read-eyes 14s infinite ease-in-out; }
-        .read-glasses { animation: read-glasses 14s infinite ease-in-out; }
-        @keyframes read-breathe { 0%,100% { transform: scale(1,1) translate(0,0);} 50% { transform: scale(1.02,0.98) translate(0,0.5px);} }
-        @keyframes read-blink { 0%,6%,100% { transform: scaleY(1);} 3% { transform: scaleY(0.1);} }
-        @keyframes read-shadow { 0%,100% { transform: scaleX(1); opacity:0.5;} 50% { transform: scaleX(1.03); opacity:0.47;} }
-        @keyframes read-body { 0%,36%,44%,54%,62%,100% { transform: translateY(0);} 40% { transform: translateY(0.4px);} 58% { transform: translateY(0.4px);} }
-        @keyframes read-arm-l { 0% { transform: translate(0,0) rotate(0);} 2.5% { transform: translate(-0.5px,0) rotate(25deg);} 5% { transform: translate(0.3px,0) rotate(-20deg);} 7.5% { transform: translate(-0.5px,0) rotate(22deg);} 10% { transform: translate(0,0) rotate(0);} 18% { transform: translate(-1px,-1px) rotate(15deg);} 26% { transform: translate(2px,0) rotate(-5deg);} 76% { transform: translate(2px,0) rotate(-5deg);} 84% { transform: translate(1px,2px) rotate(0);} 92% { transform: translate(0,0) rotate(0);} 100% { transform: translate(0,0) rotate(0);} }
-        @keyframes read-arm-r { 0%,22% { transform: translate(0,0);} 28%,76% { transform: translate(-1px,0);} 84%,100% { transform: translate(0,0);} }
-        @keyframes read-book { 0%,12% { opacity:0; transform: translate(-5px,-2px) scaleX(0.5);} 18% { opacity:1; transform: translate(-5px,-2px) scaleX(0.5);} 26% { opacity:1; transform: translate(0,0) scaleX(1);} 76% { opacity:1; transform: translate(0,0) scaleX(1);} 84% { opacity:0; transform: translate(0,4px) scaleX(0.8);} 100% { opacity:0; transform: translate(0,4px) scaleX(0.8);} }
-        @keyframes read-eyes { 0%,22% { transform: translate(0,0);} 30% { transform: translate(0,0.5px);} 46% { transform: translate(-0.3px,0.5px);} 60% { transform: translate(0.3px,0.5px);} 70% { transform: translate(0,0.5px);} 80%,100% { transform: translate(0,0);} }
-        @keyframes read-glasses { 0%,12% { opacity:0; transform: translateY(-0.5px);} 18% { opacity:1; transform: translateY(0);} 30% { opacity:1; transform: translateY(0);} 72% { opacity:1; transform: translateY(0.3px);} 78% { opacity:1; transform: translateY(-0.1px);} 84% { opacity:1; transform: translateY(0);} 92% { opacity:0; transform: translateY(-0.5px);} 100% { opacity:0; transform: translateY(-0.5px);} }
-      </style>
-    </defs>
+    <defs><style>
+      .read-breathe { transform-origin: 7.5px 13px; animation: read-breathe 3.2s infinite ease-in-out; }
+      .read-blink { transform-origin: 7.5px 9px; animation: read-blink 5s infinite; }
+      .read-shadow { transform-origin: 7.5px 15.5px; animation: read-shadow 3.2s infinite ease-in-out; }
+      .read-body { animation: read-body 14s infinite ease-in-out; }
+      .read-arm-l { transform-origin: 2px 10px; animation: read-arm-l 14s infinite ease-in-out; }
+      .read-arm-r { animation: read-arm-r 14s infinite ease-in-out; }
+      .read-book { opacity:0; transform-origin: 7px 11.5px; animation: read-book 14s infinite ease-in-out; }
+      .read-eyes { animation: read-eyes 14s infinite ease-in-out; }
+      .read-glasses { animation: read-glasses 14s infinite ease-in-out; }
+      @keyframes read-breathe { 0%,100% { transform: scale(1,1) translate(0,0);} 50% { transform: scale(1.02,0.98) translate(0,0.5px);} }
+      @keyframes read-blink { 0%,6%,100% { transform: scaleY(1);} 3% { transform: scaleY(0.1);} }
+      @keyframes read-shadow { 0%,100% { transform: scaleX(1); opacity:0.5;} 50% { transform: scaleX(1.03); opacity:0.47;} }
+      @keyframes read-body { 0%,36%,44%,54%,62%,100% { transform: translateY(0);} 40% { transform: translateY(0.4px);} 58% { transform: translateY(0.4px);} }
+      @keyframes read-arm-l { 0% { transform: translate(0,0) rotate(0);} 2.5% { transform: translate(-0.5px,0) rotate(25deg);} 5% { transform: translate(0.3px,0) rotate(-20deg);} 7.5% { transform: translate(-0.5px,0) rotate(22deg);} 10% { transform: translate(0,0) rotate(0);} 18% { transform: translate(-1px,-1px) rotate(15deg);} 26% { transform: translate(2px,0) rotate(-5deg);} 76% { transform: translate(2px,0) rotate(-5deg);} 84% { transform: translate(1px,2px) rotate(0);} 92% { transform: translate(0,0) rotate(0);} 100% { transform: translate(0,0) rotate(0);} }
+      @keyframes read-arm-r { 0%,22% { transform: translate(0,0);} 28%,76% { transform: translate(-1px,0);} 84%,100% { transform: translate(0,0);} }
+      @keyframes read-book { 0%,12% { opacity:0; transform: translate(-5px,-2px) scaleX(0.5);} 18% { opacity:1; transform: translate(-5px,-2px) scaleX(0.5);} 26% { opacity:1; transform: translate(0,0) scaleX(1);} 76% { opacity:1; transform: translate(0,0) scaleX(1);} 84% { opacity:0; transform: translate(0,4px) scaleX(0.8);} 100% { opacity:0; transform: translate(0,4px) scaleX(0.8);} }
+      @keyframes read-eyes { 0%,22% { transform: translate(0,0);} 30% { transform: translate(0,0.5px);} 46% { transform: translate(-0.3px,0.5px);} 60% { transform: translate(0.3px,0.5px);} 70% { transform: translate(0,0.5px);} 80%,100% { transform: translate(0,0);} }
+      @keyframes read-glasses { 0%,12% { opacity:0; transform: translateY(-0.5px);} 18% { opacity:1; transform: translateY(0);} 30% { opacity:1; transform: translateY(0);} 72% { opacity:1; transform: translateY(0.3px);} 78% { opacity:1; transform: translateY(-0.1px);} 84% { opacity:1; transform: translateY(0);} 92% { opacity:0; transform: translateY(-0.5px);} 100% { opacity:0; transform: translateY(-0.5px);} }
+    </style></defs>
     <rect class="read-shadow" x="3" y="15" width="9" height="1" fill="#000"/>
     <g class="read-body"><g class="read-breathe">
       <g fill="#DE886D">
@@ -291,17 +363,14 @@
     </g></g>
   </svg>
 
-  <!-- ========== 7. 出错 ========== -->
+  <!-- ========== 9. 出错 ========== -->
   <svg class="mood" id="mood-error" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
     <style>
       .err-body { transform-origin: 7.5px 15px; animation: err-body 2.5s infinite ease-in-out; }
       .err-arm { transform-origin: 14px 10px; animation: err-arm 0.4s infinite alternate ease-in-out; }
-      .err-smoke { opacity:0; animation: err-smoke 3s infinite ease-out; }
-      .err-s1 { animation-delay:0s; } .err-s2 { animation-delay:1s; } .err-s3 { animation-delay:2s; }
       .err-warn { animation: err-warn 0.8s infinite ease-in-out; }
       @keyframes err-body { 0%,100% { transform: scale(1,1) translateY(0);} 50% { transform: scale(1.05,0.9) translateY(1.5px);} }
       @keyframes err-arm { 0% { transform: rotate(0);} 100% { transform: rotate(-60deg);} }
-      @keyframes err-smoke { 0% { transform: translate(7.5px,6px) scale(0.5); opacity:0;} 20% { opacity:0.6;} 100% { transform: translate(7.5px,-15px) scale(2); opacity:0;} }
       @keyframes err-warn { 0%,100% { opacity:1;} 50% { opacity:0.15;} }
     </style>
     <rect x="-1" y="15" width="17" height="1" fill="#000" opacity="0.5"/>
@@ -325,12 +394,39 @@
 </div>
 
 <script>
+  var IDLE_POOL = ['idle', 'idle-bubble', 'happy', 'react-right'];
+  var currentMood = 'idle';
+  var idleTimer = null;
+
   function setMood(name) {
+    if (name !== 'idle') {
+      clearIdleTimer();
+    }
     var all = document.querySelectorAll('.mood');
     for (var i = 0; i < all.length; i++) all[i].classList.remove('active');
     var el = document.getElementById('mood-' + name);
     if (el) el.classList.add('active');
+    currentMood = name;
+
+    if (name === 'idle') startIdleRotation();
   }
+
+  function startIdleRotation() {
+    clearIdleTimer();
+    idleTimer = setInterval(function() {
+      if (currentMood !== 'idle') return;
+      var pick = IDLE_POOL[Math.floor(Math.random() * IDLE_POOL.length)];
+      var all = document.querySelectorAll('.mood');
+      for (var i = 0; i < all.length; i++) all[i].classList.remove('active');
+      var el = document.getElementById('mood-' + pick);
+      if (el) el.classList.add('active');
+    }, 15000);
+  }
+
+  function clearIdleTimer() {
+    if (idleTimer) { clearInterval(idleTimer); idleTimer = null; }
+  }
+
   window.petEngine = {
     onTap: function() { showBubble('Yuna～'); },
     onDoubleTap: function() { showBubble('轻一点嘛～'); },
@@ -338,6 +434,7 @@
     onCombo: function(c) { showBubble(c >= 8 ? '别戳啦，会疼的～' : (c >= 5 ? '乖乖的～' : '喜欢你～')); },
     setMood: function(name) { setMood(name); }
   };
+
   function showBubble(text) {
     var old = document.getElementById('bubble');
     if (old) old.remove();
@@ -348,6 +445,8 @@
     document.body.appendChild(b);
     setTimeout(function(){ b.remove(); }, 2000);
   }
+
+  startIdleRotation();
 </script>
 </body>
 </html>

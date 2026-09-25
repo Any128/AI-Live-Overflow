@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html, body { margin:0; padding:0; background:transparent; overflow:hidden; }
+  #stage { width:100vw; height:100vh; display:block; position:relative; }
+  .mood { display:none; width:100%; height:100%; }
+  .mood.active { display:block; }
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- ========== 1. 待机：左顾右盼 ========== -->
+  <svg class="mood active" id="mood-idle" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <style>
+        .idle-body { transform-origin: 7.5px 13px; animation: idle-body 10s infinite ease-in-out; }
+        .idle-breathe { transform-origin: 7.5px 13px; animation: idle-breathe 3.2s infinite ease-in-out; }
+        .idle-shadow { transform-origin: 7.5px 15.5px; animation: idle-shadow 10s infinite ease-in-out; }
+        .idle-arm-l { transform-origin: 1px 10px; animation: idle-arm-l 10s infinite ease-in-out; }
+        .idle-eyes-look { animation: idle-eye-track 10s infinite ease-in-out; }
+        .idle-eyes-blink { transform-origin: 7.5px 9px; animation: idle-eye-blink 10s infinite linear; }
+        @keyframes idle-breathe { 0%,100% { transform: scale(1,1) translate(0,0);} 50% { transform: scale(1.02,0.98) translate(0,0.5px);} }
+        @keyframes idle-body { 0%,8%,25%,30%,40%,45%,60%,100% { transform: scale(1,1) translate(0,0);} 12%,22% { transform: scale(1,1) translate(1px,0);} 48%,57% { transform: scale(1,1) translate(-1px,0);} 33%,38% { transform: scale(1,1) translate(0.5px,0);} }
+        @keyframes idle-shadow { 0%,8%,25%,30%,40%,45%,60%,100% { transform: scaleX(1) translate(0,0); opacity:0.5;} 12%,22% { transform: scaleX(1) translate(1px,0); opacity:0.5;} 48%,57% { transform: scaleX(1) translate(-1px,0); opacity:0.5;} 33%,38% { transform: scaleX(1) translate(0.5px,0); opacity:0.5;} }
+        @keyframes idle-eye-track { 0%,10%,25%,43%,60%,100% { transform: translate(0,0);} 12%,22% { transform: translate(3px,0);} 48%,57% { transform: translate(-3px,0);} }
+        @keyframes idle-eye-blink { 0%,3%,7%,18%,22%,47%,51%,78%,82%,100% { transform: scaleY(1);} 5%,20%,49%,80% { transform: scaleY(0.1);} }
+        @keyframes idle-arm-l { 0%,30% { transform: translate(0,0) rotate(0deg);} 33% { transform: translate(1px,-3px) rotate(15deg);} 34% { transform: translate(1.5px,-4px) rotate(35deg);} 35% { transform: translate(0.5px,-2.5px) rotate(0deg);} 36% { transform: translate(1.5px,-4px) rotate(35deg);} 37% { transform: translate(0.5px,-2.5px) rotate(0deg);} 38% { transform: translate(1.5px,-4px) rotate(35deg);} 39% { transform: translate(0.5px,-2.5px) rotate(0deg);} 42%,100% { transform: translate(0,0) rotate(0deg);} }
+      </style>
+    </defs>
+    <rect class="idle-shadow" x="3" y="15" width="9" height="1" fill="#000" opacity="0.5"/>
+    <g fill="#DE886D">
+      <rect x="3" y="12" width="1" height="3"/><rect x="5" y="12" width="1" height="3"/>
+      <rect x="9" y="12" width="1" height="3"/><rect x="11" y="12" width="1" height="3"/>
+    </g>
+    <g class="idle-body"><g class="idle-breathe">
+      <rect x="2" y="6" width="11" height="7" fill="#DE886D"/>
+      <g class="idle-arm-l"><rect x="0" y="9" width="2" height="2" fill="#DE886D"/></g>
+      <rect x="13" y="9" width="2" height="2" fill="#DE886D"/>
+      <g class="idle-eyes-look" fill="#000"><g class="idle-eyes-blink">
+        <rect x="4" y="8" width="1" height="2"/><rect x="10" y="8" width="1" height="2"/>
+      </g></g>
+    </g></g>
+  </svg>
+
+  <!-- ========== 2. 思考 ========== -->
+  <svg class="mood" id="mood-thinking" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <style>
+        #think-shadow { transform-box: view-box; transform-origin: 7.5px 15.5px; animation: think-shadow 12s infinite ease-in-out; }
+        .think-breathe { transform-box: view-box; transform-origin: 7.5px 13px; animation: think-breathe 12s infinite ease-in-out; }
+        .think-attend { transform-box: view-box; transform-origin: 7.5px 13px; animation: think-attend 12s infinite ease-in-out; }
+        .think-arm-l { transform-box: fill-box; transform-origin: 100% 0%; animation: think-arm-l 12s infinite ease-in-out; }
+        .think-arm-r { transform-box: fill-box; transform-origin: 0% 0%; animation: think-arm-r 12s infinite ease-in-out; }
+        .think-eyes { transform-box: view-box; transform-origin: 7.5px 9px; animation: think-eyes 12s infinite ease-in-out; }
+        .think-left-bubble { transform-box: fill-box; transform-origin: 50% 100%; opacity: 0; animation: think-left-bubble 12s infinite ease-in-out; }
+        .think-right-bubble { transform-box: fill-box; transform-origin: 50% 100%; opacity: 0; animation: think-right-bubble 12s infinite ease-in-out; }
+        .think-dot { opacity: 0; }
+        .think-left-bubble .td1 { animation: think-left-dot1 12s infinite step-end; }
+        .think-left-bubble .td2 { animation: think-left-dot2 12s infinite step-end; }
+        .think-left-bubble .td3 { animation: think-left-dot3 12s infinite step-end; }
+        .think-right-bubble .td1 { animation: think-right-dot1 12s infinite step-end; }
+        .think-right-bubble .td2 { animation: think-right-dot2 12s infinite step-end; }
+        .think-right-bubble .td3 { animation: think-right-dot3 12s infinite step-end; }
+        @keyframes think-shadow { 0%,3%,52%,99%,100% { opacity:0.5; transform: translateX(0) scaleX(1);} 15%,43% { opacity:0.4; transform: translateX(-0.28px) scaleX(0.9);} 70%,96% { opacity:0.4; transform: translateX(0.28px) scaleX(0.9);} }
+        @keyframes think-breathe { 0%,3%,52%,99%,100% { transform: scale(1,1) translateY(0);} 15%,29%,43%,70%,84%,96% { transform: scale(1.006,0.994) translateY(0.08px);} 22%,36%,64%,78%,90% { transform: scale(1.014,0.986) translateY(0.18px);} 54% { transform: scale(0.996,1.004) translateY(-0.08px);} }
+        @keyframes think-attend { 0%,3%,52%,99%,100% { transform: translate(0,0) rotate(0deg);} 7% { transform: translate(-0.3px,0.08px) rotate(-1.6deg);} 15% { transform: translate(-0.48px,0.14px) rotate(-2.6deg);} 30% { transform: translate(-0.45px,0.1px) rotate(-2.3deg);} 42% { transform: translate(-0.4px,0.08px) rotate(-2.0deg);} 49% { transform: translate(-0.2px,0.04px) rotate(-0.8deg);} 51% { transform: translate(-0.05px,0) rotate(-0.2deg);} 54% { transform: translate(0,0.08px) rotate(0deg);} 58% { transform: translate(0.3px,0.08px) rotate(1.6deg);} 70% { transform: translate(0.48px,0.14px) rotate(2.6deg);} 84% { transform: translate(0.45px,0.1px) rotate(2.3deg);} 96% { transform: translate(0.32px,0.06px) rotate(1.4deg);} 98% { transform: translate(0.05px,0) rotate(0.2deg);} }
+        @keyframes think-arm-l { 0%,3%,52%,99%,100% { transform: translate(0,0) rotate(0deg);} 7% { transform: translate(0.18px,-0.7px) rotate(14deg);} 15%,49% { transform: translate(0.35px,-1.05px) rotate(22deg);} 30% { transform: translate(0.28px,-0.92px) rotate(26deg);} 58%,96% { transform: translate(-0.08px,0.45px) rotate(0deg);} 84% { transform: translate(-0.12px,0.55px) rotate(0deg);} }
+        @keyframes think-arm-r { 0%,3%,52%,99%,100% { transform: translate(0,0) rotate(0deg);} 7%,49% { transform: translate(0.08px,0.45px) rotate(0deg);} 30% { transform: translate(0.12px,0.55px) rotate(0deg);} 58% { transform: translate(-0.18px,-0.7px) rotate(-14deg);} 70%,96% { transform: translate(-0.35px,-1.05px) rotate(-22deg);} 84% { transform: translate(-0.28px,-0.92px) rotate(-26deg);} }
+        @keyframes think-eyes { 0%,3%,52%,99%,100% { transform: translate(0,0) scaleY(1);} 5% { transform: translate(-0.3px,-0.5px) scaleY(0.95);} 9%,42% { transform: translate(-0.45px,-0.78px) scaleY(0.85);} 43% { transform: translate(-0.45px,-0.78px) scaleY(0.12);} 44%,47% { transform: translate(-0.45px,-0.78px) scaleY(1);} 48% { transform: translate(-0.45px,-0.78px) scaleY(0.12);} 50% { transform: translate(-0.15px,-0.25px) scaleY(0.95);} 54% { transform: translate(0,0) scaleY(0.18);} 55% { transform: translate(0.3px,-0.5px) scaleY(0.95);} 59%,88% { transform: translate(0.45px,-0.78px) scaleY(0.85);} 92% { transform: translate(0.45px,-0.78px) scaleY(0.12);} 93%,96% { transform: translate(0.45px,-0.78px) scaleY(1);} 97% { transform: translate(0.45px,-0.78px) scaleY(0.12);} 98% { transform: translate(0.2px,-0.4px) scaleY(0.95);} 100% { transform: translate(0,0) scaleY(1);} }
+        @keyframes think-left-bubble { 0%,3% { opacity:0; transform: translate(-0.2px,0.7px) scale(0.82);} 5% { opacity:0.75; transform: translate(-0.1px,0.25px) scale(0.94);} 7% { opacity:1; transform: translate(0,0) scale(1.04);} 10%,43% { opacity:1; transform: translate(0,0) scale(1);} 46% { opacity:1; transform: translate(0,-0.2px) scale(1.02);} 48% { opacity:1; transform: translate(0,-0.18px) scale(1.01);} 49% { opacity:1; transform: translate(0,0) scale(1);} 52% { opacity:0; transform: translate(0,0.65px) scale(0.9);} 53%,100% { opacity:0; transform: translate(0,0.65px) scale(0.9);} }
+        @keyframes think-right-bubble { 0%,53% { opacity:0; transform: translate(0.2px,0.7px) scale(0.82);} 54% { opacity:0.75; transform: translate(0.1px,0.25px) scale(0.94);} 58% { opacity:1; transform: translate(0,0) scale(1.04);} 61%,92% { opacity:1; transform: translate(0,0) scale(1);} 94% { opacity:1; transform: translate(0,-0.2px) scale(1.02);} 96% { opacity:1; transform: translate(0,-0.18px) scale(1.01);} 97% { opacity:1; transform: translate(0,0) scale(1);} 99% { opacity:0; transform: translate(0,0.65px) scale(0.9);} 100% { opacity:0; transform: translate(0,0.65px) scale(0.9);} }
+        @keyframes think-left-dot1 { 0%,7.99%,17.99%,19.99%,29.99%,31.99%,48.99%,100% { opacity:0;} 8%,17.98%,20%,29.98%,32%,48.98% { opacity:1;} }
+        @keyframes think-left-dot2 { 0%,11.99%,17.99%,23.99%,29.99%,35.99%,48.99%,100% { opacity:0;} 12%,17.98%,24%,29.98%,36%,48.98% { opacity:1;} }
+        @keyframes think-left-dot3 { 0%,15.99%,17.99%,27.99%,29.99%,39.99%,48.99%,100% { opacity:0;} 16%,17.98%,28%,29.98%,40%,48.98% { opacity:1;} }
+        @keyframes think-right-dot1 { 0%,58.99%,68.99%,70.99%,80.99%,82.99%,98.49%,100% { opacity:0;} 59%,68.98%,71%,80.98%,83%,98.48% { opacity:1;} }
+        @keyframes think-right-dot2 { 0%,62.99%,68.99%,74.99%,80.99%,86.99%,98.49%,100% { opacity:0;} 63%,68.98%,75%,80.98%,87%,98.48% { opacity:1;} }
+        @keyframes think-right-dot3 { 0%,66.99%,68.99%,78.99%,80.99%,90.99%,98.49%,100% { opacity:0;} 67%,68.98%,79%,80.98%,91%,98.48% { opacity:1;} }
+      </style>
+    </defs>
+    <rect id="think-shadow" x="3" y="15" width="9" height="1" fill="#000" opacity="0.5"/>
+    <g class="think-breathe"><g class="think-attend">
+      <g fill="#DE886D">
+        <rect x="2" y="6" width="11" height="7"/>
+        <rect class="think-arm-l" x="0" y="9" width="2" height="2"/>
+        <rect class="think-arm-r" x="13" y="9" width="2" height="2"/>
+      </g>
+      <g class="think-eyes" fill="#000">
+        <rect x="4" y="8" width="1" height="2"/><rect x="10" y="8" width="1" height="2"/>
+      </g>
+    </g></g>
+    <g class="think-left-bubble">
+      <path d="M-1 -4 H6 V-3 H7 V2 H6 V3 H-1 V2 H-2 V-3 H-1 Z" fill="#FFF"/>
+      <rect class="think-dot td1" x="0" y="-1" width="1" height="1" fill="#256891"/>
+      <rect class="think-dot td2" x="2" y="-1" width="1" height="1" fill="#256891"/>
+      <rect class="think-dot td3" x="4" y="-1" width="1" height="1" fill="#256891"/>
+    </g>
+    <g class="think-right-bubble">
+      <path d="M9 -4 H16 V-3 H17 V2 H16 V3 H9 V2 H8 V-3 H9 Z" fill="#FFF"/>
+      <rect class="think-dot td1" x="10" y="-1" width="1" height="1" fill="#256891"/>
+      <rect class="think-dot td2" x="12" y="-1" width="1" height="1" fill="#256891"/>
+      <rect class="think-dot td3" x="14" y="-1" width="1" height="1" fill="#256891"/>
+    </g>
+  </svg>
+
+  <!-- ========== 3. 高兴 ========== -->
+  <svg class="mood" id="mood-happy" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
+    <defs><style>
+      .happy-bounce { transform-box: fill-box; transform-origin: 50% 100%; animation: happy-bounce 1s infinite ease-in-out; }
+      .happy-shadow { transform-box: fill-box; transform-origin: 50% 50%; animation: happy-shadow 1s infinite ease-in-out; }
+      .happy-arm-l { transform-box: fill-box; transform-origin: 100% 50%; animation: happy-wave-l 0.15s infinite alternate ease-in-out; }
+      .happy-arm-r { transform-box: fill-box; transform-origin: 0% 50%; animation: happy-wave-r 0.15s infinite alternate ease-in-out; }
+      .happy-eyes { transform-box: fill-box; transform-origin: 50% 50%; animation: happy-blink 2s infinite linear; }
+      .happy-spark { opacity: 0; animation: happy-flash 1.5s infinite step-end; }
+      @keyframes happy-bounce { 0%,15%,100% { transform: translateY(0) scaleY(1);} 20% { transform: translateY(0) scaleY(0.85);} 40% { transform: translateY(-10px) scaleY(1.05);} 50% { transform: translateY(-12px) scaleY(1);} 60% { transform: translateY(-10px) scaleY(1.05);} 80% { transform: translateY(0) scaleY(0.85);} 85% { transform: translateY(0) scaleY(1);} }
+      @keyframes happy-shadow { 0%,15%,100% { transform: scale(1); opacity:0.5;} 20% { transform: scale(1.1); opacity:0.6;} 40% { transform: scale(0.6); opacity:0.2;} 50% { transform: scale(0.5); opacity:0.15;} 60% { transform: scale(0.6); opacity:0.2;} 80% { transform: scale(1.1); opacity:0.6;} 85% { transform: scale(1); opacity:0.5;} }
+      @keyframes happy-wave-l { 0% { transform: rotate(45deg);} 100% { transform: rotate(85deg);} }
+      @keyframes happy-wave-r { 0% { transform: rotate(-45deg);} 100% { transform: rotate(-85deg);} }
+      @keyframes happy-blink { 0%,46%,54%,100% { transform: scaleY(1);} 50% { transform: scaleY(0.1);} }
+      @keyframes happy-flash { 0%,40%,100% { opacity:0;} 10%,30% { opacity:1;} }
+    </style></defs>
+    <rect class="happy-shadow" x="3" y="15" width="9" height="1" fill="#000"/>
+    <g class="happy-bounce">
+      <g fill="#DE886D">
+        <rect x="3" y="13" width="1" height="2"/><rect x="5" y="13" width="1" height="2"/>
+        <rect x="9" y="13" width="1" height="2"/><rect x="11" y="13" width="1" height="2"/>
+        <rect x="2" y="6" width="11" height="7"/>
+        <g class="happy-arm-l"><rect x="0" y="9" width="2" height="2"/></g>
+        <g class="happy-arm-r"><rect x="13" y="9" width="2" height="2"/></g>
+      </g>
+      <g class="happy-eyes" fill="#000">
+        <rect x="4" y="8" width="1" height="2"/><rect x="10" y="8" width="1" height="2"/>
+      </g>
+    </g>
+    <g fill="#FFD700">
+      <rect class="happy-spark" x="-4" y="-2" width="1" height="1" style="animation-delay:0s"/>
+      <rect class="happy-spark" x="18" y="-4" width="1" height="1" style="animation-delay:0.3s"/>
+      <rect class="happy-spark" x="20" y="10" width="1" height="1" style="animation-delay:0.6s"/>
+      <rect class="happy-spark" x="-6" y="12" width="1" height="1" style="animation-delay:0.9s"/>
+    </g>
+  </svg>
+
+  <!-- ========== 4. 吃醋（晕） ========== -->
+  <svg class="mood" id="mood-dizzy" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
+    <style>
+      .dizzy-upper { transform-box: view-box; transform-origin: 7.5px 13px; animation: dizzy-body 3s linear infinite; }
+      .dizzy-legs { transform-box: view-box; transform-origin: 7.5px 15px; animation: dizzy-legs 3s linear infinite; }
+      .dizzy-shadow { transform-box: view-box; transform-origin: 7.5px 15.5px; animation: dizzy-shadow 3s linear infinite; }
+      .dizzy-arm-l { transform-box: view-box; transform-origin: 2px 10px; animation: dizzy-arm 3s linear infinite; }
+      .dizzy-arm-r { transform-box: view-box; transform-origin: 13px 10px; animation: dizzy-arm 3s linear infinite; animation-delay:-1.5s; }
+      .dizzy-eye { stroke-dasharray: 0.85 0.40; animation: dizzy-eye 0.8s linear infinite; }
+      .dizzy-star { transform-box: view-box; transform-origin: center; animation: dizzy-star 6s linear infinite; }
+      @keyframes dizzy-body { 0% { transform: translate(0,-0.4px) rotate(0);} 25% { transform: translate(0.6px,0) rotate(3.5deg);} 50% { transform: translate(0,0.4px) rotate(0);} 75% { transform: translate(-0.6px,0) rotate(-3.5deg);} 100% { transform: translate(0,-0.4px) rotate(0);} }
+      @keyframes dizzy-legs { 0% { transform: translate(0,-0.12px);} 25% { transform: translate(0.2px,0);} 50% { transform: translate(0,0.12px);} 75% { transform: translate(-0.2px,0);} 100% { transform: translate(0,-0.12px);} }
+      @keyframes dizzy-shadow { 0% { transform: scaleX(1); opacity:0.48;} 25% { transform: scaleX(0.96); opacity:0.42;} 50% { transform: scaleX(1.04); opacity:0.52;} 75% { transform: scaleX(0.96); opacity:0.42;} 100% { transform: scaleX(1); opacity:0.48;} }
+      @keyframes dizzy-arm { 0% { transform: translateY(0) rotate(0);} 25% { transform: translateY(0.4px) rotate(-8deg);} 50% { transform: translateY(0) rotate(0);} 75% { transform: translateY(-0.4px) rotate(8deg);} 100% { transform: translateY(0) rotate(0);} }
+      @keyframes dizzy-eye { from { stroke-dashoffset:0;} to { stroke-dashoffset:-1.25;} }
+      @keyframes dizzy-star { 0% { transform: translate(7.5px,0.5px) scale(1); opacity:1;} 25% { transform: translate(11.5px,2px) scale(1); opacity:1;} 50% { transform: translate(7.5px,3.5px) scale(0.75); opacity:0.6;} 75% { transform: translate(3.5px,2px) scale(1); opacity:1;} 100% { transform: translate(7.5px,0.5px) scale(1); opacity:1;} }
+    </style>
+    <rect class="dizzy-shadow" x="3" y="15" width="9" height="1" fill="#000" opacity="0.48"/>
+    <g class="dizzy-legs" fill="#DE886D">
+      <rect x="3" y="13" width="1" height="2"/><rect x="5" y="13" width="1" height="2"/>
+      <rect x="9" y="13" width="1" height="2"/><rect x="11" y="13" width="1" height="2"/>
+    </g>
+    <g class="dizzy-upper">
+      <g fill="#DE886D">
+        <rect x="2" y="6" width="11" height="7"/>
+        <g class="dizzy-arm-l"><rect x="0" y="9" width="2" height="2"/></g>
+        <g class="dizzy-arm-r"><rect x="13" y="9" width="2" height="2"/></g>
+      </g>
+      <g fill="none" stroke="#000" stroke-width="0.52" stroke-linecap="round">
+        <path class="dizzy-eye" d="M4.5 8.5 A1.2 1.2 0 1 1 4.5 11 A1.2 1.2 0 1 1 4.5 8.5"/>
+        <path class="dizzy-eye" d="M10.5 8.5 A1.2 1.2 0 1 1 10.5 11 A1.2 1.2 0 1 1 10.5 8.5"/>
+      </g>
+    </g>
+    <g fill="#FFE066">
+      <rect class="dizzy-star" x="7.25" y="1.75" width="0.5" height="0.5" style="animation-delay:0s"/>
+      <rect class="dizzy-star" x="7.25" y="1.75" width="0.5" height="0.5" style="animation-delay:-2s"/>
+      <rect class="dizzy-star" x="7.25" y="1.75" width="0.5" height="0.5" style="animation-delay:-4s"/>
+    </g>
+  </svg>
+
+  <!-- ========== 5. 听歌 ========== -->
+  <svg class="mood" id="mood-music" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
+    <style>
+      .music-shadow { transform-box: fill-box; transform-origin: 50% 50%; animation: music-shadow 1.6s infinite ease-in-out; }
+      .music-body { transform-origin: 7.5px 13px; animation: music-body 1.6s infinite ease-in-out; }
+      .music-arm-l { transform-box: fill-box; transform-origin: 100% 0%; animation: music-arm-l 1.6s infinite ease-in-out; }
+      .music-arm-r { transform-box: fill-box; transform-origin: 0% 0%; animation: music-arm-r 1.6s infinite ease-in-out; }
+      .music-ear-l { transform-box: fill-box; transform-origin: 100% 50%; animation: music-ear 1.6s infinite ease-in-out; }
+      .music-ear-r { transform-box: fill-box; transform-origin: 0% 50%; animation: music-ear 1.6s infinite ease-in-out; }
+      .music-note-l { animation: music-note-l 1.6s infinite ease-out; }
+      .music-note-r { animation: music-note-r 1.6s infinite ease-out; }
+      @keyframes music-shadow { 0%,100% { transform: translateX(0) scaleX(1); opacity:0.5;} 22%,30% { transform: translateX(-0.5px) scaleX(0.85); opacity:0.45;} 50% { transform: translateX(0) scaleX(1); opacity:0.5;} 70%,78% { transform: translateX(0.5px) scaleX(0.85); opacity:0.45;} }
+      @keyframes music-body { 0%,100% { transform: rotate(0) translateY(0);} 22%,30% { transform: rotate(-6deg) translateY(0.3px);} 50% { transform: rotate(0) translateY(-0.2px);} 70%,78% { transform: rotate(6deg) translateY(0.3px);} }
+      @keyframes music-arm-l { 0%,100% { transform: rotate(0);} 22%,30% { transform: rotate(-30deg);} 50% { transform: rotate(0);} 70%,78% { transform: rotate(20deg);} }
+      @keyframes music-arm-r { 0%,100% { transform: rotate(0);} 22%,30% { transform: rotate(-20deg);} 50% { transform: rotate(0);} 70%,78% { transform: rotate(30deg);} }
+      @keyframes music-ear { 0%,100% { transform: scaleX(1);} 22%,30% { transform: scaleX(0.85);} 50% { transform: scaleX(1.02);} 70%,78% { transform: scaleX(0.85);} }
+      @keyframes music-note-l { 0%,14%,42%,100% { opacity:0; transform: translate(0,0);} 22% { opacity:1; transform: translate(-0.4px,-1.2px);} 38% { opacity:0; transform: translate(-1.6px,-3.5px);} }
+      @keyframes music-note-r { 0%,62%,82%,100% { opacity:0; transform: translate(0,0);} 70% { opacity:1; transform: translate(0.4px,-1.2px);} 78% { opacity:0; transform: translate(1.6px,-3.5px);} }
+    </style>
+    <rect class="music-shadow" x="3" y="15" width="9" height="1" fill="#000"/>
+    <g fill="#DE886D">
+      <rect x="3" y="13" width="1" height="2"/><rect x="5" y="13" width="1" height="2"/>
+      <rect x="9" y="13" width="1" height="2"/><rect x="11" y="13" width="1" height="2"/>
+    </g>
+    <g class="music-body">
+      <rect x="2" y="6" width="11" height="7" fill="#DE886D"/>
+      <g fill="#1D5C83">
+        <rect x="4.9" y="2.85" width="5.05" height="0.75"/>
+        <rect x="4.46" y="2.93" width="0.75" height="0.75"/><rect x="9.66" y="2.93" width="0.75" height="0.75"/>
+        <rect x="4.03" y="3.1" width="0.75" height="0.75"/><rect x="10.11" y="3.09" width="0.75" height="0.75"/>
+        <rect x="3.59" y="3.34" width="0.75" height="0.75"/><rect x="10.57" y="3.33" width="0.75" height="0.75"/>
+        <rect x="3.15" y="3.63" width="0.75" height="0.75"/><rect x="11.02" y="3.61" width="0.75" height="0.75"/>
+        <rect x="2.71" y="3.98" width="0.75" height="0.75"/><rect x="11.48" y="3.96" width="0.75" height="0.75"/>
+        <rect x="2.28" y="4.37" width="0.75" height="0.75"/><rect x="11.94" y="4.34" width="0.75" height="0.75"/>
+        <rect x="1.84" y="4.82" width="0.75" height="0.75"/><rect x="12.39" y="4.78" width="0.75" height="0.75"/>
+        <rect x="1.4" y="5.3" width="0.75" height="0.75"/><rect x="12.85" y="5.25" width="0.75" height="0.75"/>
+      </g>
+      <g class="music-ear-l">
+        <rect x="0.2" y="7" width="0.6" height="2.4" fill="#1D5C83"/>
+        <rect x="0.8" y="6.5" width="0.6" height="3.25" fill="#256891"/>
+        <rect x="1.4" y="6" width="0.6" height="4.05" fill="#2E7AA8"/>
+      </g>
+      <g class="music-ear-r">
+        <rect x="14.2" y="7" width="0.6" height="2.4" fill="#1D5C83"/>
+        <rect x="13.6" y="6.5" width="0.6" height="3.25" fill="#256891"/>
+        <rect x="13" y="6" width="0.6" height="4.05" fill="#2E7AA8"/>
+      </g>
+      <g class="music-arm-l"><rect x="-1" y="9" width="2" height="2" fill="#DE886D"/></g>
+      <g class="music-arm-r"><rect x="14" y="9" width="2" height="2" fill="#DE886D"/></g>
+      <g fill="none" stroke="#000" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="3.5,8.5 4.5,9.5 5.5,8.5"/>
+        <polyline points="9.5,8.5 10.5,9.5 11.5,8.5"/>
+      </g>
+    </g>
+    <g transform="translate(-5 4)"><g class="music-note-l" fill="#FFE066"><rect x="0" y="2" width="1" height="1"/><rect x="1" y="0" width="1" height="3"/><rect x="2" y="0" width="1" height="1"/></g></g>
+    <g transform="translate(15 4)"><g class="music-note-r" fill="#FFE066"><rect x="0" y="2" width="1" height="1"/><rect x="1" y="0" width="1" height="3"/><rect x="2" y="0" width="1" height="1"/></g></g>
+  </svg>
+
+  <!-- ========== 6. 看书 ========== -->
+  <svg class="mood" id="mood-reading" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <style>
+        .read-breathe { transform-origin: 7.5px 13px; animation: read-breathe 3.2s infinite ease-in-out; }
+        .read-blink { transform-origin: 7.5px 9px; animation: read-blink 5s infinite; }
+        .read-shadow { transform-origin: 7.5px 15.5px; animation: read-shadow 3.2s infinite ease-in-out; }
+        .read-body { animation: read-body 14s infinite ease-in-out; }
+        .read-arm-l { transform-origin: 2px 10px; animation: read-arm-l 14s infinite ease-in-out; }
+        .read-arm-r { animation: read-arm-r 14s infinite ease-in-out; }
+        .read-book { opacity:0; transform-origin: 7px 11.5px; animation: read-book 14s infinite ease-in-out; }
+        .read-eyes { animation: read-eyes 14s infinite ease-in-out; }
+        .read-glasses { animation: read-glasses 14s infinite ease-in-out; }
+        @keyframes read-breathe { 0%,100% { transform: scale(1,1) translate(0,0);} 50% { transform: scale(1.02,0.98) translate(0,0.5px);} }
+        @keyframes read-blink { 0%,6%,100% { transform: scaleY(1);} 3% { transform: scaleY(0.1);} }
+        @keyframes read-shadow { 0%,100% { transform: scaleX(1); opacity:0.5;} 50% { transform: scaleX(1.03); opacity:0.47;} }
+        @keyframes read-body { 0%,36%,44%,54%,62%,100% { transform: translateY(0);} 40% { transform: translateY(0.4px);} 58% { transform: translateY(0.4px);} }
+        @keyframes read-arm-l { 0% { transform: translate(0,0) rotate(0);} 2.5% { transform: translate(-0.5px,0) rotate(25deg);} 5% { transform: translate(0.3px,0) rotate(-20deg);} 7.5% { transform: translate(-0.5px,0) rotate(22deg);} 10% { transform: translate(0,0) rotate(0);} 18% { transform: translate(-1px,-1px) rotate(15deg);} 26% { transform: translate(2px,0) rotate(-5deg);} 76% { transform: translate(2px,0) rotate(-5deg);} 84% { transform: translate(1px,2px) rotate(0);} 92% { transform: translate(0,0) rotate(0);} 100% { transform: translate(0,0) rotate(0);} }
+        @keyframes read-arm-r { 0%,22% { transform: translate(0,0);} 28%,76% { transform: translate(-1px,0);} 84%,100% { transform: translate(0,0);} }
+        @keyframes read-book { 0%,12% { opacity:0; transform: translate(-5px,-2px) scaleX(0.5);} 18% { opacity:1; transform: translate(-5px,-2px) scaleX(0.5);} 26% { opacity:1; transform: translate(0,0) scaleX(1);} 76% { opacity:1; transform: translate(0,0) scaleX(1);} 84% { opacity:0; transform: translate(0,4px) scaleX(0.8);} 100% { opacity:0; transform: translate(0,4px) scaleX(0.8);} }
+        @keyframes read-eyes { 0%,22% { transform: translate(0,0);} 30% { transform: translate(0,0.5px);} 46% { transform: translate(-0.3px,0.5px);} 60% { transform: translate(0.3px,0.5px);} 70% { transform: translate(0,0.5px);} 80%,100% { transform: translate(0,0);} }
+        @keyframes read-glasses { 0%,12% { opacity:0; transform: translateY(-0.5px);} 18% { opacity:1; transform: translateY(0);} 30% { opacity:1; transform: translateY(0);} 72% { opacity:1; transform: translateY(0.3px);} 78% { opacity:1; transform: translateY(-0.1px);} 84% { opacity:1; transform: translateY(0);} 92% { opacity:0; transform: translateY(-0.5px);} 100% { opacity:0; transform: translateY(-0.5px);} }
+      </style>
+    </defs>
+    <rect class="read-shadow" x="3" y="15" width="9" height="1" fill="#000"/>
+    <g class="read-body"><g class="read-breathe">
+      <g fill="#DE886D">
+        <rect x="3" y="11" width="1" height="4"/><rect x="5" y="11" width="1" height="4"/>
+        <rect x="9" y="11" width="1" height="4"/><rect x="11" y="11" width="1" height="4"/>
+      </g>
+      <rect x="2" y="6" width="11" height="7" fill="#DE886D"/>
+      <g class="read-eyes"><g class="read-blink" fill="#000">
+        <rect x="4" y="8" width="1" height="2"/><rect x="10" y="8" width="1" height="2"/>
+      </g></g>
+      <g class="read-glasses" fill="none" stroke="#6B2522" stroke-width="0.56" stroke-linecap="round">
+        <circle cx="4.415" cy="9" r="2.03"/><circle cx="10.585" cy="9" r="2.03"/>
+        <path d="M6.445 8.85 C7.036 8.35 7.964 8.35 8.555 8.85"/>
+      </g>
+      <g class="read-book">
+        <rect x="3" y="10" width="8" height="4" fill="#4A90D9"/>
+        <rect x="7" y="10" width="1" height="4" fill="#2E6AB0"/>
+        <rect x="3.9" y="9.7" width="6.5" height="0.3" fill="#FFFDE7"/>
+      </g>
+      <g fill="#DE886D">
+        <g class="read-arm-l"><rect x="0" y="9" width="2" height="2"/></g>
+        <g class="read-arm-r"><rect x="13" y="9" width="2" height="2"/></g>
+      </g>
+    </g></g>
+  </svg>
+
+  <!-- ========== 7. 出错 ========== -->
+  <svg class="mood" id="mood-error" viewBox="-15 -25 45 45" xmlns="http://www.w3.org/2000/svg">
+    <style>
+      .err-body { transform-origin: 7.5px 15px; animation: err-body 2.5s infinite ease-in-out; }
+      .err-arm { transform-origin: 14px 10px; animation: err-arm 0.4s infinite alternate ease-in-out; }
+      .err-smoke { opacity:0; animation: err-smoke 3s infinite ease-out; }
+      .err-s1 { animation-delay:0s; } .err-s2 { animation-delay:1s; } .err-s3 { animation-delay:2s; }
+      .err-warn { animation: err-warn 0.8s infinite ease-in-out; }
+      @keyframes err-body { 0%,100% { transform: scale(1,1) translateY(0);} 50% { transform: scale(1.05,0.9) translateY(1.5px);} }
+      @keyframes err-arm { 0% { transform: rotate(0);} 100% { transform: rotate(-60deg);} }
+      @keyframes err-smoke { 0% { transform: translate(7.5px,6px) scale(0.5); opacity:0;} 20% { opacity:0.6;} 100% { transform: translate(7.5px,-15px) scale(2); opacity:0;} }
+      @keyframes err-warn { 0%,100% { opacity:1;} 50% { opacity:0.15;} }
+    </style>
+    <rect x="-1" y="15" width="17" height="1" fill="#000" opacity="0.5"/>
+    <g class="err-body">
+      <g fill="#DE886D">
+        <rect x="3" y="9" width="1" height="1"/><rect x="5" y="9" width="1" height="1"/>
+        <rect x="9" y="9" width="1" height="1"/><rect x="11" y="9" width="1" height="1"/>
+        <rect x="1" y="10" width="13" height="5"/><rect x="-1" y="13" width="2" height="2"/>
+      </g>
+      <g class="err-arm"><rect x="13" y="11" width="2" height="2" fill="#DE886D"/></g>
+      <g fill="#000">
+        <rect x="3" y="12" width="0.6" height="2.2" transform="rotate(45 3.3 13.1)"/>
+        <rect x="3" y="12" width="0.6" height="2.2" transform="rotate(-45 3.3 13.1)"/>
+        <rect x="10" y="12" width="0.6" height="2.2" transform="rotate(45 10.3 13.1)"/>
+        <rect x="10" y="12" width="0.6" height="2.2" transform="rotate(-45 10.3 13.1)"/>
+      </g>
+    </g>
+    <g class="err-warn" fill="#FF3B30"><text x="7.5" y="6" text-anchor="middle" font-size="3.5" font-weight="700">ERROR</text></g>
+  </svg>
+
+</div>
+
+<script>
+  function setMood(name) {
+    var all = document.querySelectorAll('.mood');
+    for (var i = 0; i < all.length; i++) all[i].classList.remove('active');
+    var el = document.getElementById('mood-' + name);
+    if (el) el.classList.add('active');
+  }
+  window.petEngine = {
+    onTap: function() { showBubble('Yuna～'); },
+    onDoubleTap: function() { showBubble('轻一点嘛～'); },
+    onLongPress: function() { showBubble('嗯？怎么啦～'); },
+    onCombo: function(c) { showBubble(c >= 8 ? '别戳啦，会疼的～' : (c >= 5 ? '乖乖的～' : '喜欢你～')); },
+    setMood: function(name) { setMood(name); }
+  };
+  function showBubble(text) {
+    var old = document.getElementById('bubble');
+    if (old) old.remove();
+    var b = document.createElement('div');
+    b.id = 'bubble';
+    b.textContent = text;
+    b.style.cssText = 'position:absolute;top:20px;left:50%;transform:translateX(-50%);background:#fff;color:#333;padding:6px 12px;border-radius:12px;font-size:16px;box-shadow:0 2px 8px rgba(0,0,0,0.2);white-space:nowrap;';
+    document.body.appendChild(b);
+    setTimeout(function(){ b.remove(); }, 2000);
+  }
+</script>
+</body>
+</html>
