@@ -2,15 +2,11 @@ package com.example.deskpet
 
 import android.Manifest
 import android.app.Activity
-import android.app.AlertDialog
-import android.app.AppOpsManager
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Process
 import android.provider.Settings
 import android.widget.Button
 import android.widget.LinearLayout
@@ -44,7 +40,7 @@ class MainActivity : Activity() {
 
         layout.addView(Button(this).apply {
             text = "启动桌宠"
-            setOnClickListener { ensurePermissionsAndStart() }
+            setOnClickListener { ensureOverlayPermissionAndStart() }
         })
 
         layout.addView(Button(this).apply {
@@ -68,12 +64,7 @@ class MainActivity : Activity() {
         }
     }
 
-    /**
-     * 先检查悬浮窗权限，再检查 UsageStats 权限。
-     * 两者都通过才真正启动桌宠服务。
-     */
-    private fun ensurePermissionsAndStart() {
-        // 1. 悬浮窗权限
+    private fun ensureOverlayPermissionAndStart() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
             Toast.makeText(this, "请先授予「显示在其他应用上层」权限", Toast.LENGTH_LONG).show()
             startActivity(
@@ -84,52 +75,7 @@ class MainActivity : Activity() {
             )
             return
         }
-
-        // 2. UsageStats（使用情况访问）权限
-        if (!hasUsageStatsPermission()) {
-            AlertDialog.Builder(this)
-                .setTitle("需要「使用情况访问」权限")
-                .setMessage("开启后，桌宠才能知道你在用哪个 App，并做出对应反应。")
-                .setPositiveButton("去设置") { _, _ ->
-                    startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
-                }
-                .setNegativeButton("先跳过") { _, _ ->
-                    // 用户跳过，照常启动，但没有 App 感知能力
-                    startPet()
-                }
-                .show()
-            return
-        }
-
         startPet()
-    }
-
-    /**
-     * 检查是否已经授予 UsageStats 权限。
-     * 不能只靠 checkSelfPermission，因为它不受运行时权限控制，
-     * 必须查 AppOpsManager。
-     */
-    private fun hasUsageStatsPermission(): Boolean {
-        return try {
-            val appOps = getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
-            val mode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                appOps.unsafeCheckOpNoThrow(
-                    AppOpsManager.OPSTR_GET_USAGE_STATS,
-                    Process.myUid(),
-                    packageName
-                )
-            } else {
-                @Suppress("DEPRECATION")
-                appOps.checkOpNoThrow(
-                    AppOpsManager.OPSTR_GET_USAGE_STATS,
-                    Process.myUid(),
-                    packageName
-                )
-            }
-            mode == AppOpsManager.MODE_ALLOWED
-        } catch (e: Exception) {
-            false
-        }
     }
 
     private fun startPet() {
