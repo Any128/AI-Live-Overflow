@@ -332,10 +332,10 @@
     if (el) el.classList.add('active');
   }
   window.petEngine = {
-    onTap: function() { showBubble('嘎嘎！'); },
-    onDoubleTap: function() { showBubble('别戳啦！'); },
-    onLongPress: function() { showBubble('？'); },
-    onCombo: function(c) { showBubble(c >= 8 ? '别戳了！😡' : (c >= 5 ? '好烦哦！😠' : '嘻嘻～😊')); },
+    onTap: function() { showBubble('Yuna～'); },
+    onDoubleTap: function() { showBubble('轻一点嘛～'); },
+    onLongPress: function() { showBubble('嗯？怎么啦～'); },
+    onCombo: function(c) { showBubble(c >= 8 ? '别戳啦，会疼的～' : (c >= 5 ? '乖乖的～' : '喜欢你～')); },
     setMood: function(name) { setMood(name); }
   };
   function showBubble(text) {
