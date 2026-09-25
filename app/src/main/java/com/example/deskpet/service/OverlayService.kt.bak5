@@ -31,6 +31,7 @@ class OverlayService : Service() {
         private const val PET_SIZE_DP = 180
         private const val PET_HEIGHT_DP = 240
 
+        // App 包名 → 桌宠状态
         private val APP_MOOD = mapOf(
             "com.ai.assistance.operit" to "thinking",
             "com.tencent.mm" to "reading",
@@ -165,6 +166,7 @@ class OverlayService : Service() {
                     val speed = if (duration > 0) distance / duration * 1000 else 0.0
 
                     if (hasMoved && speed > 1500) {
+                        // Fling：甩出去再弹回来
                         params?.x = (params?.x ?: 0) + (dx * 1.5).toInt()
                         params?.y = (params?.y ?: 0) + (dy * 1.5).toInt()
                         windowManager?.updateViewLayout(overlayView, params)
@@ -199,17 +201,9 @@ class OverlayService : Service() {
         }
     }
 
-    // 单击：气泡 + 打断动作
     private fun onTap() {
         overlayView?.evaluateJavascript("window.petEngine && window.petEngine.onTap()", null)
-        setMood("idle")
-        handler.postDelayed({
-            val pkg = getForegroundPackage() ?: return@postDelayed
-            val mood = APP_MOOD[pkg] ?: "idle"
-            setMood(mood)
-        }, 1500)
     }
-
     private fun onDoubleTap() {
         overlayView?.evaluateJavascript("window.petEngine && window.petEngine.onDoubleTap()", null)
     }
